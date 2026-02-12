@@ -1,4 +1,3 @@
-package org.example.lab1;
 import java.awt.*;
 public class Scania implements StorableTruck {
     Truck<TurboEngine> truck;

@@ -1,5 +1,3 @@
-package org.example.lab1;
-
 public class Flatbed extends Trailer{
     private int flatbedAngle = 0;
 

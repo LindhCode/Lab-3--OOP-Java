@@ -1,5 +1,3 @@
-package org.example.lab1;
-
 import java.awt.*;
 import java.lang.classfile.constantpool.ClassEntry;
 import java.util.ArrayList;

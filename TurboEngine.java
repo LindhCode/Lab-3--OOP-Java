@@ -1,5 +1,3 @@
-package org.example.lab1;
-
 public class TurboEngine extends Engine{
     private boolean turboOn = true;
 

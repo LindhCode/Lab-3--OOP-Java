@@ -1,4 +1,3 @@
-package org.example.lab1;
 
 import java.util.Stack;
 

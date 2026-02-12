@@ -1,5 +1,3 @@
-package org.example.lab1;
-
 import java.awt.*;
 
 public class Car<E extends Engine> implements StorableCar {

@@ -1,5 +1,3 @@
-package org.example.lab1;
-
 public interface Movable {
     void move();
     void turnLeft();

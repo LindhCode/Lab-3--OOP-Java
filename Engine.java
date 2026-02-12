@@ -1,4 +1,3 @@
-package org.example.lab1;
 
 public class Engine{
     protected int enginePower;
