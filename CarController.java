@@ -60,4 +60,31 @@ public class CarController {
         }
     }
 
+    void brake(int amount) {
+    }
+
+    void setTurboOn() {
+
+    }
+
+    void setTurboOff() {
+
+    }
+
+    void liftFlatbed() {
+
+    }
+
+    void lowerFlatbed() {
+
+    }
+
+    void startEngine() {
+
+    }
+
+    void stopEngine() {
+
+    }
+
 }
