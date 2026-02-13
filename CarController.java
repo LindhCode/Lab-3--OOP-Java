@@ -80,7 +80,9 @@ public class CarController {
     }
 
     void startEngine() {
-
+        for (StorableCar car : cars) {
+            car.startEngine();
+        }
     }
 
     void stopEngine() {
