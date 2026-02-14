@@ -1,8 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -21,13 +25,16 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    ArrayList<StorableCar> cars = new ArrayList<>();
+    // Listan med bilar CarData params: StorableCar, BufferedImage, Point
+    ArrayList<CarData> cars = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(Color.black, 200));
+
+        // TIDIGARE: cc.cars.add(new Volvo240(Color.black, 200));
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -41,11 +48,12 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (StorableCar car : cars) {
+            for (CarData carObj : cars) {
+                StorableCar car = carObj.car;
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(carObj,x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -55,7 +63,8 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (StorableCar car : cars) {
+        for (CarData carObj : cars) {
+            StorableCar car = carObj.car;
             car.gas(gas);
         }
     }
@@ -80,13 +89,20 @@ public class CarController {
     }
 
     void startEngine() {
-        for (StorableCar car : cars) {
+        for (CarData carObj : cars) {
+            StorableCar car = carObj.car;
             car.startEngine();
         }
     }
 
     void stopEngine() {
-
+        for (CarData carObj : cars) {
+            StorableCar car = carObj.car;
+            car.stopEngine();
+        }
     }
 
+    public ArrayList<CarData> getCars() {
+        return cars;
+    }
 }
