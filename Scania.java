@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Scania implements StorableTruck {
+public class Scania implements TruckFeatures {
     Truck<TurboEngine> truck;
     Flatbed flatbed = new Flatbed();
 

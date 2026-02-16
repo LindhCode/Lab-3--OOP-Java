@@ -1,9 +1,7 @@
 import java.awt.*;
-import java.lang.classfile.constantpool.ClassEntry;
-import java.util.ArrayList;
 import java.util.Stack;
 
-public class CarTransportTruck<A extends StorableCar> {
+public class CarTransportTruck<A extends CarFeatures> {
     Truck<TurboEngine> truck;
     CarTransport transportTrailer;
 
@@ -22,7 +20,7 @@ public class CarTransportTruck<A extends StorableCar> {
         }
     }
 
-    public Stack<StorableCar> getCars() {
+    public Stack<CarFeatures> getCars() {
         return transportTrailer.getCars();
     }
 
@@ -43,7 +41,7 @@ public class CarTransportTruck<A extends StorableCar> {
 
     public void unloadCar() {
         if (getCurrentSpeed() == 0 && !transportTrailer.getRampUp()) {
-            StorableCar c = transportTrailer.unloadCar();
+            CarFeatures c = transportTrailer.unloadCar();
             if (c != null) {
                 c.setxPos(truck.getxPos() + 5);
                 c.setyPos(truck.getyPos() + 5);
@@ -54,7 +52,7 @@ public class CarTransportTruck<A extends StorableCar> {
     public void move(){
         if (transportTrailer.getRampUp()) {
             truck.move();
-            for (StorableCar c : transportTrailer.getCars()) {
+            for (CarFeatures c : transportTrailer.getCars()) {
                 c.setxPos(truck.getxPos());
                 c.setyPos(truck.getyPos());
             }

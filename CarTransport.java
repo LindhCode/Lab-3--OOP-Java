@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class CarTransport extends Trailer{
     private boolean rampUp = true;
-    Stack<StorableCar> cars = new Stack<>();
+    Stack<CarFeatures> cars = new Stack<>();
 
     public void lowerRamp(){
         rampUp = false;
@@ -17,17 +17,17 @@ public class CarTransport extends Trailer{
         return rampUp;
     }
 
-    public Stack<StorableCar> getCars() {
+    public Stack<CarFeatures> getCars() {
         return cars;
     }
 
-    public void loadCar(StorableCar c) {
+    public void loadCar(CarFeatures c) {
         if (!rampUp && cars.size() < 10) {
             cars.push(c);
         }
     }
 
-    public StorableCar unloadCar() {
+    public CarFeatures unloadCar() {
         if (!cars.isEmpty()) {
             return cars.pop();
         }
