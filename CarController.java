@@ -46,7 +46,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : cars) {
-                CarFeatures car = carObj.car;
+                CarFeatures car = carObj.getCar();
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
@@ -61,7 +61,7 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.gas(gas);
         }
     }
@@ -69,7 +69,7 @@ public class CarController {
     void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.brake(brake);
         }
     }
@@ -77,7 +77,7 @@ public class CarController {
     // Holy shit vilket bajslösning aja idgaf
     void setTurboOn() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             if (car instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOn();
             }
@@ -86,7 +86,7 @@ public class CarController {
 
     void setTurboOff() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             if (car instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOff();
             }
@@ -95,7 +95,7 @@ public class CarController {
 
     void liftFlatbed() {
         for (TruckData truckObj : trucks) {
-            TruckFeatures truck = truckObj.truck;
+            TruckFeatures truck = truckObj.getTruck();
             if (truck instanceof FlatbedFeatures flatbed){
                 flatbed.liftFlatbed();
             }
@@ -104,23 +104,23 @@ public class CarController {
 
     void lowerFlatbed() {
         for (TruckData truckObj : trucks) {
-            TruckFeatures truck = truckObj.truck;
+            TruckFeatures truck = truckObj.getTruck();
             if (truck instanceof FlatbedFeatures flatbed){
                 flatbed.lowerFlatbed();
             }
         }
     }
-
+    // TODO - Make it work for trucks aswell
     void startEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.startEngine();
         }
     }
 
     void stopEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.stopEngine();
         }
     }
