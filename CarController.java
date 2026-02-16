@@ -59,6 +59,9 @@ public class CarController {
 
     void checkCollisions(MiscData misc, CarData car) {
         checkCollisionCarMisc();
+        if (car instanceof Volvo240) {
+
+        }
     }
 
     void checkCollisionCarMisc() {
@@ -68,6 +71,7 @@ public class CarController {
     void checkCollisionVolvoMech() {
 
     }
+
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
