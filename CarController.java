@@ -1,12 +1,8 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -49,7 +45,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : cars) {
-                StorableCar car = carObj.car;
+                CarFeatures car = carObj.car;
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
@@ -64,7 +60,7 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (CarData carObj : cars) {
-            StorableCar car = carObj.car;
+            CarFeatures car = carObj.car;
             car.gas(gas);
         }
     }
@@ -90,14 +86,14 @@ public class CarController {
 
     void startEngine() {
         for (CarData carObj : cars) {
-            StorableCar car = carObj.car;
+            CarFeatures car = carObj.car;
             car.startEngine();
         }
     }
 
     void stopEngine() {
         for (CarData carObj : cars) {
-            StorableCar car = carObj.car;
+            CarFeatures car = carObj.car;
             car.stopEngine();
         }
     }

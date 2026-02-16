@@ -11,7 +11,6 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
     CarController cc;
 
-
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 

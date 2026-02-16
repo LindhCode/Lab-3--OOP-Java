@@ -1,4 +1,4 @@
-public interface StorableCar extends Storable{
+public interface CarFeatures extends Storable{
     void setxPos(double x);
     void setyPos(double y);
     int getSize();

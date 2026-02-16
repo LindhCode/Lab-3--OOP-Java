@@ -1,6 +1,4 @@
-import java.awt.*;
-
-public class Car<E extends Engine> implements StorableCar {
+public class Car<E extends Engine> implements CarFeatures {
     private Automobile<E> automobile;
 
     public Car(Automobile<E> automobile) {
