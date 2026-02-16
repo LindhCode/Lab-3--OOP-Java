@@ -30,7 +30,7 @@ public class DrawPanel extends JPanel{
         // Här läggs bilarna till
         // Här läggs alla bilar till, med bilobjekt, bild, point
         cc.getCars().add(new CarData(new Volvo240(Color.black, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")), new Point(100,200)));
-        cc.getCars().add(new CarData(new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
+        cc.getCars().add(new CarData((CarFeatures) new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
 
         // Synkar bilens x/y-Pos med Pointens x/y
         for(CarData carObj : cc.getCars()){

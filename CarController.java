@@ -23,6 +23,7 @@ public class CarController {
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
     ArrayList<CarData> cars = new ArrayList<>();
+    ArrayList<TruckData> trucks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
@@ -66,22 +67,48 @@ public class CarController {
     }
 
     void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.car;
+            car.brake(brake);
+        }
     }
 
+    // Holy shit vilket bajslösning aja idgaf
     void setTurboOn() {
-
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.car;
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOn();
+            }
+        }
     }
 
     void setTurboOff() {
-
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.car;
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOff();
+            }
+        }
     }
 
     void liftFlatbed() {
-
+        for (TruckData truckObj : trucks) {
+            TruckFeatures truck = truckObj.truck;
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.liftFlatbed();
+            }
+        }
     }
 
     void lowerFlatbed() {
-
+        for (TruckData truckObj : trucks) {
+            TruckFeatures truck = truckObj.truck;
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.lowerFlatbed();
+            }
+        }
     }
 
     void startEngine() {
@@ -100,5 +127,9 @@ public class CarController {
 
     public ArrayList<CarData> getCars() {
         return cars;
+    }
+
+    public ArrayList<TruckData> getTrucks() {
+        return trucks;
     }
 }
