@@ -23,6 +23,7 @@ public class CarController {
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
     ArrayList<CarData> cars = new ArrayList<>();
+    ArrayList<MiscData> miscs = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
@@ -56,6 +57,17 @@ public class CarController {
         }
     }
 
+    void checkCollisions(MiscData misc, CarData car) {
+        checkCollisionCarMisc();
+    }
+
+    void checkCollisionCarMisc() {
+        checkCollisionCarMisc();
+    }
+
+    void checkCollisionVolvoMech() {
+
+    }
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;

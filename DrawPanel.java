@@ -12,7 +12,7 @@ public class DrawPanel extends JPanel{
     CarController cc;
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    Point volvoWorkshopPoint = new Point(600,200);
 
 
     void moveit(CarData carObj,int x, int y) {
