@@ -2,9 +2,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class CarData {
-    CarFeatures car;
-    BufferedImage image;
-    Point point;
+    private CarFeatures car;
+    private BufferedImage image;
+    private Point point;
 
     public CarData(CarFeatures car, BufferedImage image, Point point){
         this.car = car;
@@ -12,7 +12,7 @@ public class CarData {
         this.point = point;
     }
 
-    public CarFeatures getCar() {
+    public CarFeatures getCarObj() {
         return car;
     }
 

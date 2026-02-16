@@ -2,9 +2,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MiscData {
-    MiscFeatures misc;
-    BufferedImage image;
-    Point point;
+    private MiscFeatures misc;
+    private BufferedImage image;
+    private Point point;
 
     public MiscData(MiscFeatures misc, BufferedImage image, Point point){
         this.misc = misc;
@@ -12,7 +12,7 @@ public class MiscData {
         this.point = point;
     }
 
-    public MiscFeatures getMisc() {
+    public MiscFeatures getMiscObj() {
         return misc;
     }
 

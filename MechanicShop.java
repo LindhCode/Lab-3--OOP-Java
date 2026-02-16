@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MechanicShop<A extends Storable> {
+public class MechanicShop<A extends Storable> implements MiscFeatures {
     private List<A> objectsInShop;
     private double xPos;
     private double yPos;
@@ -48,5 +48,14 @@ public class MechanicShop<A extends Storable> {
 
     public double getyPos() {
         return yPos;
+    }
+
+    @Override
+    public void setxPos(double x) {
+        xPos = x;
+    }
+    @Override
+    public void setyPos(double y) {
+        yPos = y;
     }
 }

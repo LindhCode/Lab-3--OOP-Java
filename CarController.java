@@ -29,9 +29,7 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-
         // TIDIGARE: cc.cars.add(new Volvo240(Color.black, 200));
-
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -46,37 +44,39 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : cars) {
-                CarFeatures car = carObj.car;
+                CarFeatures car = carObj.getCarObj();
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
                 frame.drawPanel.moveit(carObj,x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+
+                checkCollisionCarWorkshop(carObj);
             }
         }
     }
 
-    void checkCollisions(MiscData misc, CarData car) {
-        checkCollisionCarMisc();
-        if (car instanceof Volvo240) {
+    void checkCollisionCar(CarData car) {
+        checkCollisionCarWorkshop(car);
+    }
 
+    void checkCollisionCarWorkshop(CarData car) {
+        for (MiscData misc : miscs) {
+            // Distance formula
+            double deltaDistance = Math.sqrt(Math.pow((car.getCarObj().getxPos() - misc.getMiscObj().getxPos()), 2)
+                    + Math.pow((car.getCarObj().getyPos() - misc.getMiscObj().getyPos()), 2));
+            if (deltaDistance < 100) {
+                System.out.println("HITTT");
+            }
         }
-    }
-
-    void checkCollisionCarMisc() {
-        checkCollisionCarMisc();
-    }
-
-    void checkCollisionVolvoMech() {
-
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCarObj();
             car.gas(gas);
         }
     }
@@ -102,19 +102,23 @@ public class CarController {
 
     void startEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCarObj();
             car.startEngine();
         }
     }
 
     void stopEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCarObj();
             car.stopEngine();
         }
     }
 
     public ArrayList<CarData> getCars() {
         return cars;
+    }
+
+    public ArrayList<MiscData> getMiscs() {
+        return miscs;
     }
 }
