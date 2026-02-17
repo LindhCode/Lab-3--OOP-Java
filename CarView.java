@@ -28,6 +28,7 @@ public class CarView extends JFrame{
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
+    int brakeAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
@@ -67,6 +68,7 @@ public class CarView extends JFrame{
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+                brakeAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
 
@@ -108,12 +110,11 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
-        stopButton.addActionListener(new ActionListener() {
+        brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Uncomment after brakeAmount is declared
-//                carC.brake(brakeAmount);
-
+                carC.brake(brakeAmount);
             }
         });
         turboOnButton.addActionListener(new ActionListener() {

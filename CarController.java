@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /*
@@ -24,12 +25,15 @@ public class CarController {
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
     ArrayList<CarData> cars = new ArrayList<>();
     ArrayList<MiscData> miscs = new ArrayList<>();
+    ArrayList<TruckData> trucks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
         CarController cc = new CarController();
 
+
         // TIDIGARE: cc.cars.add(new Volvo240(Color.black, 200));
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -43,7 +47,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (CarData carObj : cars) {
+            for (CarData carObj : getCars()) {
                 CarFeatures car = carObj.getCarObj();
                 car.move();
                 int x = (int) Math.round(car.getxPos());
@@ -53,6 +57,15 @@ public class CarController {
                 frame.drawPanel.repaint();
 
                 checkCollisionCarWorkshop(carObj);
+            }
+            for (TruckData truckObj : getTrucks()) {
+                TruckFeatures truck = truckObj.getTruck();
+                truck.move();
+                int x = (int) Math.round(truck.getxPos());
+                int y = (int) Math.round(truck.getyPos());
+                frame.drawPanel.moveit(truckObj,x, y);
+                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.repaint();
             }
         }
     }
@@ -88,42 +101,85 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (CarData carObj : cars) {
+        for (CarData carObj : getCars()) {
             CarFeatures car = carObj.getCarObj();
             car.gas(gas);
         }
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            truck.gas(gas);
+        }
+
     }
 
     void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (CarData carObj : getCars()) {
+            CarFeatures car = carObj.getCarObj();
+            car.brake(brake);
+        }
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            truck.gas(brake);
+        }
     }
 
+    // Holy shit vilket bajslösning aja idgaf
     void setTurboOn() {
-
+        for (CarData carObj : getCars()) {
+            CarFeatures car = carObj.getCarObj();
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOn();
+            }
+        }
     }
 
     void setTurboOff() {
-
+        for (CarData carObj : getCars()) {
+            CarFeatures car = carObj.getCarObj();
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOff();
+            }
+        }
     }
 
     void liftFlatbed() {
-
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.liftFlatbed();
+            }
+        }
     }
 
     void lowerFlatbed() {
-
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.lowerFlatbed();
+            }
+        }
     }
-
+    // TODO - Make it work for trucks aswell
     void startEngine() {
-        for (CarData carObj : cars) {
+        for (CarData carObj : getCars()) {
             CarFeatures car = carObj.getCarObj();
             car.startEngine();
+        }
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            truck.startEngine();
         }
     }
 
     void stopEngine() {
-        for (CarData carObj : cars) {
+        for (CarData carObj : getCars()) {
             CarFeatures car = carObj.getCarObj();
             car.stopEngine();
+        }
+        for (TruckData truckObj : getTrucks()) {
+            TruckFeatures truck = truckObj.getTruck();
+            truck.stopEngine();
         }
     }
 
@@ -133,5 +189,9 @@ public class CarController {
 
     public ArrayList<MiscData> getMiscs() {
         return miscs;
+    }
+
+    public ArrayList<TruckData> getTrucks() {
+        return trucks;
     }
 }
