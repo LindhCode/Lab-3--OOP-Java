@@ -23,6 +23,7 @@ public class CarController {
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
     ArrayList<CarData> cars = new ArrayList<>();
+    ArrayList<TruckData> trucks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
@@ -45,7 +46,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : cars) {
-                CarFeatures car = carObj.car;
+                CarFeatures car = carObj.getCar();
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
@@ -60,45 +61,75 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.gas(gas);
         }
     }
 
     void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.getCar();
+            car.brake(brake);
+        }
     }
 
+    // Holy shit vilket bajslösning aja idgaf
     void setTurboOn() {
-
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.getCar();
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOn();
+            }
+        }
     }
 
     void setTurboOff() {
-
+        for (CarData carObj : cars) {
+            CarFeatures car = carObj.getCar();
+            if (car instanceof TurboFeatures carWithTurbo){
+                carWithTurbo.setTurboOff();
+            }
+        }
     }
 
     void liftFlatbed() {
-
+        for (TruckData truckObj : trucks) {
+            TruckFeatures truck = truckObj.getTruck();
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.liftFlatbed();
+            }
+        }
     }
 
     void lowerFlatbed() {
-
+        for (TruckData truckObj : trucks) {
+            TruckFeatures truck = truckObj.getTruck();
+            if (truck instanceof FlatbedFeatures flatbed){
+                flatbed.lowerFlatbed();
+            }
+        }
     }
-
+    // TODO - Make it work for trucks aswell
     void startEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.startEngine();
         }
     }
 
     void stopEngine() {
         for (CarData carObj : cars) {
-            CarFeatures car = carObj.car;
+            CarFeatures car = carObj.getCar();
             car.stopEngine();
         }
     }
 
     public ArrayList<CarData> getCars() {
         return cars;
+    }
+
+    public ArrayList<TruckData> getTrucks() {
+        return trucks;
     }
 }

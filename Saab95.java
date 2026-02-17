@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 implements CarFeatures {
+public class Saab95 implements TurboFeatures {
     private Car car;
 
     public Saab95(Color color, int enginePower) {
@@ -61,5 +61,15 @@ public class Saab95 implements CarFeatures {
 
     public double getCurrentSpeed() {
         return car.getCurrentSpeed();
+    }
+
+    @Override
+    public void setTurboOn() {
+        getCar().getAutomobile().getEngine().setTurboOn();
+    }
+
+    @Override
+    public void setTurboOff() {
+        getCar().getAutomobile().getEngine().setTurboOff();
     }
 }

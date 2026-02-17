@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Scania implements TruckFeatures {
+public class Scania implements FlatbedFeatures {
     Truck<TurboEngine> truck;
     Flatbed flatbed = new Flatbed();
 
@@ -7,12 +7,14 @@ public class Scania implements TruckFeatures {
         this.truck = new Truck<>(new Automobile<>(color, "Scania", new TurboEngine(enginePower), 2, 5));
     }
 
+    @Override
     public void liftFlatbed() {
         if (truck.getCurrentSpeed() == 0) {
             flatbed.liftFlatbed();
         }
     }
 
+    @Override
     public void lowerFlatbed() {
         if (truck.getCurrentSpeed() == 0) {
             flatbed.lowerFlatbed();

@@ -16,8 +16,8 @@ public class DrawPanel extends JPanel{
 
 
     void moveit(CarData carObj,int x, int y) {
-        carObj.point.x = x;
-        carObj.point.y = y;
+        carObj.getPoint().x = x;
+        carObj.getPoint().y = y;
     }
 
     // Initializes the panel and reads the images
@@ -30,12 +30,12 @@ public class DrawPanel extends JPanel{
         // Här läggs bilarna till
         // Här läggs alla bilar till, med bilobjekt, bild, point
         cc.getCars().add(new CarData(new Volvo240(Color.black, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")), new Point(100,200)));
-        cc.getCars().add(new CarData(new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
+        cc.getCars().add(new CarData((CarFeatures) new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
 
         // Synkar bilens x/y-Pos med Pointens x/y
         for(CarData carObj : cc.getCars()){
-            carObj.car.setxPos(carObj.point.x);
-            carObj.car.setyPos(carObj.point.y);
+            carObj.getCar().setxPos(carObj.getPoint().x);
+            carObj.getCar().setyPos(carObj.getPoint().y);
         }
 
         // Print an error message in case file is not found with a try/catch block
@@ -60,7 +60,7 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         // Updatera för alla i listan
         for (CarData carObj : cc.getCars()){
-            g.drawImage(carObj.image,carObj.point.x,carObj.point.y, null);
+            g.drawImage(carObj.getImage(),carObj.getPoint().x,carObj.getPoint().y, null);
         }
         //g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
