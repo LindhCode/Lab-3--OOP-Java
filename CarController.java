@@ -73,8 +73,9 @@ public class CarController {
     }
 
     void checkVolvoCollisionWorkshop(CarData car, MiscData misc,  double deltaDistance) {
-        if (car.getCarObj() instanceof Volvo240) {
+        if (car.getCarObj() instanceof Volvo240 && misc.getMiscObj() instanceof MechanicShop<?>) {
             System.out.println("Fungerar");
+            misc.getMiscObj()
         }
     }
 
