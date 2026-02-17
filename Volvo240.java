@@ -1,13 +1,13 @@
 import java.awt.*;
 
-public class Volvo240 implements StorableCar{
+public class Volvo240 implements CarFeatures {
     private Car<RegularEngine> car;
 
     public Volvo240(Color color, int enginePower) {
         this.car = new Car<RegularEngine>(new Automobile(color, "Saab95", new RegularEngine(enginePower), 5, 2));
     }
 
-    public Car getCar() {
+    public Car<RegularEngine> getCar() {
         return car;
     }
 

@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Scania implements StorableTruck {
+public class Scania implements FlatbedFeatures {
     Truck<TurboEngine> truck;
     Flatbed flatbed = new Flatbed();
 
@@ -7,12 +7,14 @@ public class Scania implements StorableTruck {
         this.truck = new Truck<>(new Automobile<>(color, "Scania", new TurboEngine(enginePower), 2, 5));
     }
 
+    @Override
     public void liftFlatbed() {
         if (truck.getCurrentSpeed() == 0) {
             flatbed.liftFlatbed();
         }
     }
 
+    @Override
     public void lowerFlatbed() {
         if (truck.getCurrentSpeed() == 0) {
             flatbed.lowerFlatbed();
@@ -51,6 +53,9 @@ public class Scania implements StorableTruck {
         truck.turnRight();
     }
 
+    public void turnAround(){
+        truck.turnAround();
+    }
     public void stopEngine(){
         truck.stopEngine();
     }
@@ -63,5 +68,14 @@ public class Scania implements StorableTruck {
         return truck.getyPos();
     }
 
+    @Override
+    public void setxPos(double x) {
+        truck.setxPos(x);
+    }
+
+    @Override
+    public void setyPos(double y) {
+        truck.setyPos(y);
+    }
 }
 
