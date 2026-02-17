@@ -66,9 +66,15 @@ public class CarController {
             // Distance formula
             double deltaDistance = Math.sqrt(Math.pow((car.getCarObj().getxPos() - misc.getMiscObj().getxPos()), 2)
                     + Math.pow((car.getCarObj().getyPos() - misc.getMiscObj().getyPos()), 2));
-            if (deltaDistance < 100) {
-                System.out.println("HITTT");
+            if (deltaDistance < 90 && misc.getMiscObj() instanceof MechanicShop<?>) {
+                checkVolvoCollisionWorkshop(car, misc, deltaDistance);
             }
+        }
+    }
+
+    void checkVolvoCollisionWorkshop(CarData car, MiscData misc,  double deltaDistance) {
+        if (car.getCarObj() instanceof Volvo240) {
+            System.out.println("Fungerar");
         }
     }
 
