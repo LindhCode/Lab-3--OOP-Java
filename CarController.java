@@ -1,13 +1,8 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -62,19 +57,19 @@ public class CarController {
                 int y = (int)Math.round(car.getyPos());
                 if (x > 700) {
                     car.setxPos(700);
-                    CarBounce(car);
+                    carBounce(car);
                 }
                 if (x < 0) {
                     car.setxPos(0);
-                    CarBounce(car);
+                    carBounce(car);
                 }
                 if (y > 500) {
                     car.setyPos(500);
-                    CarBounce(car);
+                    carBounce(car);
                 }
                 if (y < 0) {
                     car.setyPos(0);
-                    CarBounce(car);
+                    carBounce(car);
                 }
 
                 frame.drawPanel.moveit(carObj, x, y);
@@ -90,19 +85,19 @@ public class CarController {
 
                 if (x > 700) {
                     truck.setxPos(700);
-                    TruckBounce(truck);
+                    truckBounce(truck);
                 }
                 if (x < 0) {
                     truck.setxPos(0);
-                    TruckBounce(truck);
+                    truckBounce(truck);
                 }
                 if (y > 500) {
                     truck.setyPos(500);
-                    TruckBounce(truck);
+                    truckBounce(truck);
                 }
                 if (y < 0) {
                     truck.setyPos(0);
-                    TruckBounce(truck);
+                    truckBounce(truck);
                 }
                 frame.drawPanel.moveit(truckObj,x, y);
                 // repaint() calls the paintComponent method of the panel
@@ -237,12 +232,12 @@ public class CarController {
         return trucks;
     }
 
-    private void CarBounce(CarFeatures car) {
+    private void carBounce(CarFeatures car) {
         car.stopEngine();
         car.turnAround();
         car.startEngine();
     }
-    private void TruckBounce(TruckFeatures truck) {
+    private void truckBounce(TruckFeatures truck) {
         truck.stopEngine();
         truck.turnAround();
         truck.startEngine();

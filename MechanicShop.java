@@ -32,7 +32,6 @@ public class MechanicShop<A extends Storable> implements MiscFeatures {
         && Math.abs(repairObject.getyPos() - this.yPos) <= 10
         && getObjectsInShop().size() != capacity){
             objectsInShop.add(repairObject);
-            System.out.println("Your car is at repair place: " + getObjectsInShop().size());
         }
         else{
             System.out.println("Can't add object to the shop!");
