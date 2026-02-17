@@ -27,6 +27,8 @@ public class Saab95 implements StorableCar{
         car.turnRight();
     }
 
+    public void turnAround() { car.turnAround();}
+
     public void setyPos(double y) {
         car.setyPos(y);
     }

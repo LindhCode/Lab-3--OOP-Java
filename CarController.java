@@ -47,15 +47,57 @@ public class CarController {
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : cars) {
                 StorableCar car = carObj.car;
                 car.move();
-                int x = (int) Math.round(car.getxPos());
-                int y = (int) Math.round(car.getyPos());
-                frame.drawPanel.moveit(carObj,x, y);
-                // repaint() calls the paintComponent method of the panel
+                int x = (int)Math.round(car.getxPos());
+                int y = (int)Math.round(car.getyPos());
+                if (x > 700) {
+                    car.stopEngine();
+                    car.setxPos(700);
+                    car.turnAround();
+                    car.startEngine();
+                    car.gas(1);
+                    car.move();
+                }
+                if (x < 0) {
+                    car.stopEngine();
+                    car.setxPos(0);
+                    car.turnAround();
+                    car.startEngine();
+                    car.gas(1);
+                    car.move();
+                }
+
+                if (y > 500) {
+                    car.stopEngine();
+                    car.setyPos(500);
+                    car.turnAround();
+                    car.startEngine();
+                    car.gas(1);
+                    car.move();
+                }
+                if (y < 0) {
+                    car.stopEngine();
+                    car.setyPos(0);
+                    car.turnAround();
+                    car.startEngine();
+                    car.gas(1);
+                    car.move();
+                }
+
+
+
+                frame.drawPanel.moveit(carObj, x, y);
                 frame.drawPanel.repaint();
+
+
+                //frame.drawPanel.moveit(carObj,x, y);
+                // repaint() calls the paintComponent method of the panel
+                //frame.drawPanel.repaint();
+
             }
         }
     }
@@ -101,6 +143,7 @@ public class CarController {
             car.stopEngine();
         }
     }
+
 
     public ArrayList<CarData> getCars() {
         return cars;
