@@ -3,4 +3,5 @@ public interface MiscFeatures {
     double getyPos();
     void setxPos(double x);
     void setyPos(double y);
+    String getTag();
 }

@@ -7,16 +7,24 @@ public class MechanicShop<A extends Storable> implements MiscFeatures {
     private double xPos;
     private double yPos;
     private int capacity;
+    private String tag;
 
-    public MechanicShop(int capacity, double xPos, double yPos){
+    // I feel like poop writing the tag paramter
+    // It is such a quick fix inerting a new parameter just to check generic type
+    public MechanicShop(int capacity, double xPos, double yPos, String tag){
         this.objectsInShop = new ArrayList<>(capacity);
         this.capacity = capacity;
         this.xPos = xPos;
         this.yPos = yPos;
+        this.tag = tag;
     }
 
     public List<A> getObjectsInShop() {
         return objectsInShop;
+    }
+
+    public String getTag() {
+        return tag;
     }
 
     public void addToRepairList(A repairObject){

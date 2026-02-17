@@ -67,15 +67,21 @@ public class CarController {
             double deltaDistance = Math.sqrt(Math.pow((car.getCarObj().getxPos() - misc.getMiscObj().getxPos()), 2)
                     + Math.pow((car.getCarObj().getyPos() - misc.getMiscObj().getyPos()), 2));
             if (deltaDistance < 90 && misc.getMiscObj() instanceof MechanicShop<?>) {
-                checkVolvoCollisionWorkshop(car, misc, deltaDistance);
+                checkVolvoCollisionWorkshop(car, (MechanicShop) misc.getMiscObj());
             }
         }
     }
 
     // Stopped here
-    void checkVolvoCollisionWorkshop(CarData car, MiscData misc,  double deltaDistance) {
-        if (car.getCarObj() instanceof Volvo240 && misc.getMiscObj().carIsCompatible(){
+    void checkVolvoCollisionWorkshop(CarData car, MechanicShop mechShop) {
+        if (car.getCarObj() instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
             System.out.println("Fungerar");
+            // This is weak as fuc
+            mechShop.addToRepairList(car.getCarObj());
+            car.getPoint().setLocation(0, 0);
+            car.getCarObj().setxPos(0);
+            car.getCarObj().setyPos(0);
+            car.getCarObj().stopEngine();
         }
     }
 
