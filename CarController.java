@@ -59,7 +59,6 @@ public class CarController {
                     car.setxPos(700);
                     car.turnAround();
                     car.startEngine();
-                    car.gas(1);
                     car.move();
                 }
                 if (x < 0) {
@@ -67,7 +66,6 @@ public class CarController {
                     car.setxPos(0);
                     car.turnAround();
                     car.startEngine();
-                    car.gas(1);
                     car.move();
                 }
 
@@ -76,7 +74,6 @@ public class CarController {
                     car.setyPos(500);
                     car.turnAround();
                     car.startEngine();
-                    car.gas(1);
                     car.move();
                 }
                 if (y < 0) {
@@ -84,7 +81,6 @@ public class CarController {
                     car.setyPos(0);
                     car.turnAround();
                     car.startEngine();
-                    car.gas(1);
                     car.move();
                 }
 
