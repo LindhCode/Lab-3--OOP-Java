@@ -34,26 +34,23 @@ public class DrawPanel extends JPanel{
         // Här läggs bilarna till
         // Här läggs alla bilar till, med bilobjekt, bild, point
         cc.getCars().add(new CarData(new Volvo240(Color.black, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")), new Point(100,200)));
-        cc.getCars().add(new CarData((CarFeatures) new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
+        cc.getCars().add(new CarData(new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
+        cc.getMiscs().add(new MiscData(new MechanicShop<Volvo240>(10, 500, 200, "Volvo240MechanicShop"), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")), new Point(500, 200)));
         cc.getTrucks().add(new TruckData(new Scania(Color.black, 700), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")), new Point(300,200)));
 
         // Synkar bilens x/y-Pos med Pointens x/y
         for(CarData carObj : cc.getCars()){
-            carObj.getCar().setxPos(carObj.getPoint().x);
-            carObj.getCar().setyPos(carObj.getPoint().y);
+            carObj.getCarObj().setxPos(carObj.getPoint().x);
+            carObj.getCarObj().setyPos(carObj.getPoint().y);
         }
         // Synkar för truckarna
         for(TruckData truckObj : cc.getTrucks()){
             truckObj.getTruck().setxPos(truckObj.getPoint().x);
             truckObj.getTruck().setyPos(truckObj.getPoint().y);
         }
-
-        // Print an error message in case file is not found with a try/catch block
-        try {
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
+        for (MiscData miscObj : cc.getMiscs()) {
+            miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
+            miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
         }
 
     }
@@ -70,7 +67,8 @@ public class DrawPanel extends JPanel{
         for (TruckData truckObj : cc.getTrucks()){
             g.drawImage(truckObj.getImage(),truckObj.getPoint().x,truckObj.getPoint().y, null);
         }
-
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        for (MiscData miscObj : cc.getMiscs()){
+            g.drawImage(miscObj.getImage(),miscObj.getPoint().x,miscObj.getPoint().y, null);
+        }
     }
 }

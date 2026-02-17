@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /*
@@ -23,6 +24,7 @@ public class CarController {
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
     ArrayList<CarData> cars = new ArrayList<>();
+    ArrayList<MiscData> miscs = new ArrayList<>();
     ArrayList<TruckData> trucks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
@@ -46,13 +48,15 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : getCars()) {
-                CarFeatures car = carObj.getCar();
+                CarFeatures car = carObj.getCarObj();
                 car.move();
                 int x = (int) Math.round(car.getxPos());
                 int y = (int) Math.round(car.getyPos());
                 frame.drawPanel.moveit(carObj,x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+
+                checkCollisionCarWorkshop(carObj);
             }
             for (TruckData truckObj : getTrucks()) {
                 TruckFeatures truck = truckObj.getTruck();
@@ -66,11 +70,39 @@ public class CarController {
         }
     }
 
+    void checkCollisionCar(CarData car) {
+        checkCollisionCarWorkshop(car);
+    }
+
+    void checkCollisionCarWorkshop(CarData car) {
+        for (MiscData misc : miscs) {
+            // Distance formula
+            double deltaDistance = Math.sqrt(Math.pow((car.getCarObj().getxPos() - misc.getMiscObj().getxPos()), 2)
+                    + Math.pow((car.getCarObj().getyPos() - misc.getMiscObj().getyPos()), 2));
+            if (deltaDistance < 90 && misc.getMiscObj() instanceof MechanicShop<?>) {
+                checkVolvoCollisionWorkshop(car, (MechanicShop) misc.getMiscObj());
+            }
+        }
+    }
+
+    // Stopped here
+    void checkVolvoCollisionWorkshop(CarData car, MechanicShop mechShop) {
+        if (car.getCarObj() instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
+            System.out.println("Fungerar");
+            // This is weak as fuc
+            mechShop.addToRepairList(car.getCarObj());
+            car.getPoint().setLocation(0, 0);
+            car.getCarObj().setxPos(0);
+            car.getCarObj().setyPos(0);
+            car.getCarObj().stopEngine();
+        }
+    }
+
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             car.gas(gas);
         }
         for (TruckData truckObj : getTrucks()) {
@@ -83,7 +115,7 @@ public class CarController {
     void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             car.brake(brake);
         }
         for (TruckData truckObj : getTrucks()) {
@@ -95,7 +127,7 @@ public class CarController {
     // Holy shit vilket bajslösning aja idgaf
     void setTurboOn() {
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             if (car instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOn();
             }
@@ -104,7 +136,7 @@ public class CarController {
 
     void setTurboOff() {
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             if (car instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOff();
             }
@@ -131,7 +163,7 @@ public class CarController {
     // TODO - Make it work for trucks aswell
     void startEngine() {
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             car.startEngine();
         }
         for (TruckData truckObj : getTrucks()) {
@@ -142,7 +174,7 @@ public class CarController {
 
     void stopEngine() {
         for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCar();
+            CarFeatures car = carObj.getCarObj();
             car.stopEngine();
         }
         for (TruckData truckObj : getTrucks()) {
@@ -153,6 +185,10 @@ public class CarController {
 
     public ArrayList<CarData> getCars() {
         return cars;
+    }
+
+    public ArrayList<MiscData> getMiscs() {
+        return miscs;
     }
 
     public ArrayList<TruckData> getTrucks() {

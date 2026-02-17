@@ -7,7 +7,7 @@ public class Volvo240 implements CarFeatures {
         this.car = new Car<RegularEngine>(new Automobile(color, "Saab95", new RegularEngine(enginePower), 5, 2));
     }
 
-    public Car getCar() {
+    public Car<RegularEngine> getCar() {
         return car;
     }
 

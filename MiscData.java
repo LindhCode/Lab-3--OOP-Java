@@ -1,19 +1,19 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class CarData {
-    private CarFeatures car;
+public class MiscData<A extends MiscFeatures> {
+    private MiscFeatures misc;
     private BufferedImage image;
     private Point point;
 
-    public CarData(CarFeatures car, BufferedImage image, Point point){
-        this.car = car;
+    public MiscData(MiscFeatures misc, BufferedImage image, Point point){
+        this.misc = misc;
         this.image = image;
         this.point = point;
     }
 
-    public CarFeatures getCarObj() {
-        return car;
+    public MiscFeatures getMiscObj() {
+        return misc;
     }
 
     public BufferedImage getImage() {
