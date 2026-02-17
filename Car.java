@@ -45,6 +45,8 @@ public class Car<E extends Engine> implements CarFeatures {
         automobile.turnLeft();
     }
 
+    public void turnAround() { automobile.turnAround();}
+
     public void move() {
         automobile.move();
     }

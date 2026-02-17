@@ -1,9 +1,13 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -45,15 +49,35 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
+
+
+
     private class TimerListener implements ActionListener {
+
         public void actionPerformed(ActionEvent e) {
             for (CarData carObj : getCars()) {
                 CarFeatures car = carObj.getCarObj();
                 car.move();
-                int x = (int) Math.round(car.getxPos());
-                int y = (int) Math.round(car.getyPos());
-                frame.drawPanel.moveit(carObj,x, y);
-                // repaint() calls the paintComponent method of the panel
+                int x = (int)Math.round(car.getxPos());
+                int y = (int)Math.round(car.getyPos());
+                if (x > 700) {
+                    car.setxPos(700);
+                    CarBounce(car);
+                }
+                if (x < 0) {
+                    car.setxPos(0);
+                    CarBounce(car);
+                }
+                if (y > 500) {
+                    car.setyPos(500);
+                    CarBounce(car);
+                }
+                if (y < 0) {
+                    car.setyPos(0);
+                    CarBounce(car);
+                }
+
+                frame.drawPanel.moveit(carObj, x, y);
                 frame.drawPanel.repaint();
 
                 checkCollisionCarWorkshop(carObj);
@@ -63,6 +87,23 @@ public class CarController {
                 truck.move();
                 int x = (int) Math.round(truck.getxPos());
                 int y = (int) Math.round(truck.getyPos());
+
+                if (x > 700) {
+                    truck.setxPos(700);
+                    TruckBounce(truck);
+                }
+                if (x < 0) {
+                    truck.setxPos(0);
+                    TruckBounce(truck);
+                }
+                if (y > 500) {
+                    truck.setyPos(500);
+                    TruckBounce(truck);
+                }
+                if (y < 0) {
+                    truck.setyPos(0);
+                    TruckBounce(truck);
+                }
                 frame.drawPanel.moveit(truckObj,x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -183,6 +224,7 @@ public class CarController {
         }
     }
 
+
     public ArrayList<CarData> getCars() {
         return cars;
     }
@@ -194,4 +236,16 @@ public class CarController {
     public ArrayList<TruckData> getTrucks() {
         return trucks;
     }
+
+    private void CarBounce(CarFeatures car) {
+        car.stopEngine();
+        car.turnAround();
+        car.startEngine();
+    }
+    private void TruckBounce(TruckFeatures truck) {
+        truck.stopEngine();
+        truck.turnAround();
+        truck.startEngine();
+    }
+
 }

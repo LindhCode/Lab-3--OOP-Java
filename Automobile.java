@@ -106,6 +106,11 @@ public class Automobile<E extends Engine> implements Movable, Storable {
         currentRotation += (Math.PI/12);
         currentRotation %= (2*Math.PI);
     }
+    @Override
+    public void turnAround(){
+        currentRotation += (Math.PI);
+        currentRotation %= (2*Math.PI);
+    }
 
     @Override
     public void turnRight(){

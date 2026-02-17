@@ -8,4 +8,5 @@ public interface TruckFeatures extends Storable {
 //    void setTurboOff();
     void startEngine();
     void stopEngine();
+    void turnAround();
 }

@@ -39,6 +39,9 @@ public class Truck<E extends Engine> implements TruckFeatures{
         this.getAutomobile().turnRight();
     }
 
+
+    public void turnAround() { this.getAutomobile().turnAround();}
+
     public void startEngine(){
         this.getAutomobile().startEngine();
     }

@@ -27,6 +27,8 @@ public class Saab95 implements TurboFeatures {
         car.turnRight();
     }
 
+    public void turnAround() { car.turnAround();}
+
     public void setyPos(double y) {
         car.setyPos(y);
     }

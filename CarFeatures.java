@@ -9,4 +9,7 @@ public interface CarFeatures extends Storable{
 //    void setTurboOff();
     void startEngine();
     void stopEngine();
+    void turnLeft();
+    void turnRight();
+    void turnAround();
 }

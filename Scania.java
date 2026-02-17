@@ -53,6 +53,9 @@ public class Scania implements FlatbedFeatures {
         truck.turnRight();
     }
 
+    public void turnAround(){
+        truck.turnAround();
+    }
     public void stopEngine(){
         truck.stopEngine();
     }

@@ -55,6 +55,8 @@ public class Volvo240 implements CarFeatures {
         car.turnRight();
     }
 
+    public void turnAround(){car.turnAround();}
+
     public void stopEngine() {
         car.stopEngine();
     }
