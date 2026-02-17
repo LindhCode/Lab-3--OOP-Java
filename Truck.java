@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Truck<E extends Engine>{
+public class Truck<E extends Engine> implements TruckFeatures{
     private Automobile<E> automobile;
 
     public Truck(Automobile<E> automobile){
@@ -49,5 +49,15 @@ public class Truck<E extends Engine>{
 
     public Automobile<E> getAutomobile() {
         return automobile;
+    }
+
+    @Override
+    public void setxPos(double x) {
+        getAutomobile().setxPos(x);
+    }
+
+    @Override
+    public void setyPos(double y) {
+        getAutomobile().setyPos(y);
     }
 }

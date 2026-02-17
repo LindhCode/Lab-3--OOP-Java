@@ -65,5 +65,14 @@ public class Scania implements FlatbedFeatures {
         return truck.getyPos();
     }
 
+    @Override
+    public void setxPos(double x) {
+        truck.setxPos(x);
+    }
+
+    @Override
+    public void setyPos(double y) {
+        truck.setyPos(y);
+    }
 }
 
