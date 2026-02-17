@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Stack;
 
-public class CarTransportTruck<A extends CarFeatures> {
+public class CarTransportTruck<A extends TruckFeatures> {
     Truck<TurboEngine> truck;
     CarTransport transportTrailer;
 
