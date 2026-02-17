@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MiscData {
+public class MiscData<A extends MiscFeatures> {
     private MiscFeatures misc;
     private BufferedImage image;
     private Point point;

@@ -72,10 +72,10 @@ public class CarController {
         }
     }
 
+    // Stopped here
     void checkVolvoCollisionWorkshop(CarData car, MiscData misc,  double deltaDistance) {
-        if (car.getCarObj() instanceof Volvo240 && misc.getMiscObj() instanceof MechanicShop<?>) {
+        if (car.getCarObj() instanceof Volvo240 && misc.getMiscObj().carIsCompatible(){
             System.out.println("Fungerar");
-            misc.getMiscObj()
         }
     }
 
