@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Saab95 implements TurboFeatures {
-    private Car car;
+    private Car<TurboEngine> car;
 
     public Saab95(Color color, int enginePower) {
         this.car = new Car<TurboEngine>(new Automobile(color, "Saab95", new TurboEngine(enginePower), 5, 2));
