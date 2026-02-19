@@ -113,7 +113,6 @@ public class CarView extends JFrame{
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Uncomment after brakeAmount is declared
                 carC.brake(brakeAmount);
             }
         });

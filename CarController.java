@@ -22,6 +22,8 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
+
+
     ArrayList<CarData> cars = new ArrayList<>();
     ArrayList<MiscData> miscs = new ArrayList<>();
     ArrayList<TruckData> trucks = new ArrayList<>();
@@ -196,7 +198,7 @@ public class CarController {
             }
         }
     }
-    // TODO - Make it work for trucks aswell
+
     void startEngine() {
         for (CarData carObj : getCars()) {
             CarFeatures car = carObj.getCarObj();
