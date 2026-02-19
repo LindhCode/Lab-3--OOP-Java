@@ -174,6 +174,17 @@ har stor förbättringspotential kopplat till läsbarhet. Vi anser att uppdelnin
 - Klassen behöver dekomposition i nästan alla metoder (kollisionsdetektion är relativt uppdelad)
 - Alla metoder innehåller logik som kan separeras enligt SRP. I denna klassen hade det gjort en tydlig skillnad i förståelse av logik
 
+## MechanicShop
+### Ansvar
+- Klass för att representera en bilverkstad
+- Amvänder parameteriserad polymorfism för att avgöra till vilken fordonsmodell verkstaden är till för
+### Förändringar
+- Vi har insett att den typen av polymorfism som används gör det mycket komplicerat att detektera kollision mellan specifika bilar och specifika bilverkstäder. Därmed finns det anledning att dela upp klassen med hjälp av komposition, likt bilklasserna
+- Enligt SoC och SRP kan klassen ses som lite väl bred. att därmed dela upp den enligt ovan hade ökat tydlighet i projektet och möjlighet till utökning (OCP)
+### Dekomposition
+- Klassen bör möjligtvis delas upp ytterliggare klasser för att följa SRP, OCP och SoC
+- När vi byggde klassen hade vi inte en tanke på dekomposition vilket betyder att många av metoderna kan delas upp i hjälpmetoder. Detta hade gjort läsbarheten i klassen mycket bättre samtidigt som det hade följt designprinciperna
+
 ## CarData, TruckData, MiscData
 #### Ansvarsområde
 Samtliga klasser ansvarar för att respektive fordon, dess bild och dess koordinater kopplas till samma objekt. De hanterar alltså den data som är kopplad till varje enskilt fordon eller verkstad.
