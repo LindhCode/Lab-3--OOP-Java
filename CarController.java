@@ -158,7 +158,7 @@ public class CarController {
         }
         for (TruckData truckObj : getTrucks()) {
             TruckFeatures truck = truckObj.getTruck();
-            truck.gas(brake);
+            truck.brake(brake);
         }
     }
 
