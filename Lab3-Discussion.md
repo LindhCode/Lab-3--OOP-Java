@@ -2,7 +2,6 @@
 
 `Se den externa Draw.io-filen för underlaget för dessa svar på resoneringsfrågorna`
 
-**Vi måste få in COUPLING, COHESION, DEPENDENCY IVNERISON PRICIPLE**
 
 ### Förord
 I ett tidigt skedde (Labortation 2) bestämde vi oss för att använda *composition over inheritence.* Detta har lett till ett stort antal designövervägningar, som i vissa skeden av arbetet tagit väldigt lång tid. Med det sagt så har vi i slutändan en produkt där vi har hanterat de beroendena som krävs (från vad vi uppfattar) på ett koncist sätt.
@@ -93,7 +92,7 @@ Klassen Engine fungerar självständigt och kan implementeras i flera sammanhang
 - Följa OCP genonm delegering och komposition av Car för Volvo240 och Saab95 samt Truck för Scania och CarTransportTruck
 - Klasserna Scania och CartTransportTruck har dessutom komposition till varsitt släp
 #### Förändring
-- Vi ser för tillfället ingen anledning till förändring för Saabf95 och Volvo240 då vi tycker att vi följt designprinciperna, speciellt OCP genom composition over inheritence
+- Vi ser för tillfället ingen anledning till förändring för Saab95 och Volvo240 då vi tycker att vi följt designprinciperna, speciellt OCP genom composition over inheritence
 - Att Scania och CarTransportTruck har en association till ett och samma flak följer däremot ej OCP. 
 - Relationen mellan lastbilarna och deras flak bör abstraheras, exempelvis genom ett förhållande där vardera del skapas var för sig, och kopplas ihop genom ett nytt form av objekt som bådadera har en komposition av.
 #### Dekomposition
@@ -175,13 +174,13 @@ har stor förbättringspotential kopplat till läsbarhet. Vi anser att uppdelnin
 - Alla metoder innehåller logik som kan separeras enligt SRP. I denna klassen hade det gjort en tydlig skillnad i förståelse av logik
 
 ## MechanicShop
-### Ansvar
+#### Ansvar
 - Klass för att representera en bilverkstad
 - Amvänder parameteriserad polymorfism för att avgöra till vilken fordonsmodell verkstaden är till för
-### Förändringar
+#### Förändringar
 - Vi har insett att den typen av polymorfism som används gör det mycket komplicerat att detektera kollision mellan specifika bilar och specifika bilverkstäder. Därmed finns det anledning att dela upp klassen med hjälp av komposition, likt bilklasserna
 - Enligt SoC och SRP kan klassen ses som lite väl bred. att därmed dela upp den enligt ovan hade ökat tydlighet i projektet och möjlighet till utökning (OCP)
-### Dekomposition
+#### Dekomposition
 - Klassen bör möjligtvis delas upp ytterliggare klasser för att följa SRP, OCP och SoC
 - När vi byggde klassen hade vi inte en tanke på dekomposition vilket betyder att många av metoderna kan delas upp i hjälpmetoder. Detta hade gjort läsbarheten i klassen mycket bättre samtidigt som det hade följt designprinciperna
 
@@ -199,4 +198,21 @@ Separation of Concerns (SoC):
 Samtliga klasser följer även SoC, eftersom de enbart ansvarar för datahantering och inte blandar in annan onödig logik. Detta gör systemet mer modulärt och lättare att underhålla.
 
 # Uppgift 4
-Starkt beroende gentemot Volvo, skapar hyperstarka beroenden mellan CarController och Volvoklassen specifikt.
+## Refaktoriseringsplan
+1. Skapa en ny gemensam klass `VehicleData` som kan hantera både objekt av `Cars` och `Trucks`. Denna ska ha två olika konstruktorer. Med denna klassen - generalisera redundant kod i bl.a *CarController*
+2. Skapa en ny klass `VisualUpdate` vars enda ansvar är att kalla på bildförändringar i form av förflyttning av bilder mm.
+3. Flytta fordonslist-hanteringen till en ny klass `VehicleAndMiscHandling`, detta innefattar att skapa Arraylistsen samt lägga till fordon och miscs med tillhörande *Image och Point*. För att sedan kopplas med CarController via en komposition.
+4. Förbättra funktionell dekomposition av logiken som nämns under **Dekomposition** delkapitlena i *Uppgift 3*
+5. Tillämpa Factory-designmetoder för att abstrahera användarklasserna.
+
+## Varför är detta förbättringar?
+- Det följer Single Responsible Principle att dela upp CarController-klassen i deluppgifter. Den nya strukturen möjliggör enklare testning av delar av koden, samt förminskar **coupling**. 
+- Vi följer Open-Closed-Principle för att vi möjliggör uttökning med hjälp av abstraktioner, utan att modifiera programmet.
+- Iomed den nya strukturen följer vi Separation of Concern Principle. Detta på grund av att varje del har sin egna specifika uppgift.
+
+## Finns det några delar av planen som går att utföra parallellt?
+
+Ja, planen är strukturerad på ett sätt att flera oberoende klasser kan arbetas på. Utöver det är funktionell dekomposition en stor del av refaktoriseringsplanen, vilket också kan arbetas med allsidigt. 
+
+
+
