@@ -13,6 +13,9 @@ public class CarController {
     // member fields:
     private VehicleAndMiscHandling handling;
 
+    public CarController() throws IOException {
+        this.handling = new VehicleAndMiscHandling();
+    }
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
@@ -22,7 +25,6 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-
 
 
     public static void main(String[] args) throws IOException {
