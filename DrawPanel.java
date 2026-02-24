@@ -48,7 +48,6 @@ public class DrawPanel extends JPanel{
             miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
             miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
