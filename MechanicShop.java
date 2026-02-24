@@ -28,9 +28,7 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     }
 
     public void addToRepairList(A repairObject){
-        if(Math.abs(repairObject.getxPos() - this.xPos) <= 10
-        && Math.abs(repairObject.getyPos() - this.yPos) <= 10
-        && getObjectsInShop().size() != capacity){
+        if(posCheck(repairObject) && getObjectsInShop().size() != capacity){
             objectsInShop.add(repairObject);
         }
         else{
@@ -39,9 +37,9 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     }
 
     public A removeFromRepair(int spot){
-        if (getObjectsInShop().size() >= spot ) {
+        if (carInShop(spot))  {
             A car = getObjectsInShop().get(spot);
-            getObjectsInShop().remove(spot - 1);
+            removeCar(spot);
             return car;
         }
         else{
@@ -64,5 +62,16 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     @Override
     public void setyPos(double y) {
         yPos = y;
+    }
+
+    public boolean posCheck(A repairObject){
+        return Math.abs(repairObject.getxPos() - this.xPos) <= 10 && Math.abs(repairObject.getyPos() - this.yPos) <= 10;
+    }
+
+    public boolean carInShop(int spot){
+        return getObjectsInShop().size() >= spot;
+    }
+    public void removeCar(int spot){
+        getObjectsInShop().remove(spot-1);
     }
 }
