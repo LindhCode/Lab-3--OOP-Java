@@ -20,7 +20,7 @@ I allmänhet har vi undivikt att ha dubbelsidiga beroenden. Från våran observa
 - Ett beroende som är onödigt starkt är det faktumet att CarController är beroende av tre separata klasser *CarData, MiscData, TruckData*.
 
 #### Kan ni identifiera några brott mot övriga designprinciper vi pratat om i kursen?
-- Våran abstraktion försämras av otydliga variabelnamn samt namn till Interfaces. Exempelvis CarFeatures **extends Storable** som genomgått många namnbyten för att fylla två syften samtidigt.
+- Våran abstraktion försämras av otydliga variabelnamn samt namn till Interfaces. Exempelvis CarFeatures **extends VehicleFeatures** som genomgått många namnbyten för att fylla två syften samtidigt.
 - Våra Interfaces "*CarFeatures, TruckFeatures mm*" bryter mot Single Responsibility Principle i den bemärkning att de gränssnitten står både för en Interface-hierarki - men också för att exempelvis en bil ska implementera viktiga rörelsemetoder. Detta skulle kunna delas upp med separata ansvarsområden.
 - Vi följer inte OCP i när en ny verkstad ska läggas till. Då måste en ny `Tag` kommas på, som senare hanteras hårdkodat. Här finns *room for improvement*.
 ```
