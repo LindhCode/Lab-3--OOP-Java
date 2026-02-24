@@ -11,13 +11,9 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
     CarController cc;
 
-    void moveit(CarData carObj,int x, int y) {
-        carObj.getPoint().x = x;
-        carObj.getPoint().y = y;
-    }
-    void moveit(TruckData truckObj,int x, int y) {
-        truckObj.getPoint().x = x;
-        truckObj.getPoint().y = y;
+    void moveit(VehicleData vehObj,int x, int y) {
+        vehObj.getPoint().x = x;
+        vehObj.getPoint().y = y;
     }
 
     // Initializes the panel and reads the images
@@ -29,21 +25,18 @@ public class DrawPanel extends JPanel{
 
         // Här läggs bilarna till
         // Här läggs alla bilar till, med bilobjekt, bild, point
-        cc.getCars().add(new CarData(new Volvo240(Color.black, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")), new Point(100,200)));
-        cc.getCars().add(new CarData(new Saab95(Color.green, 200), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")), new Point(200,200)));
-        cc.getMiscs().add(new MiscData(new MechanicShop<Volvo240>(10, 500, 200, "Volvo240MechanicShop"), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")), new Point(500, 200)));
-        cc.getTrucks().add(new TruckData(new Scania(Color.black, 700), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")), new Point(300,200)));
 
-        // Synkar bilens x/y-Pos med Pointens x/y
-        for(CarData carObj : cc.getCars()){
-            carObj.getCarObj().setxPos(carObj.getPoint().x);
-            carObj.getCarObj().setyPos(carObj.getPoint().y);
+        cc.getVehicles().add(CarFactory.createVolvo240(Color.green, 200, 100, 200));
+        cc.getVehicles().add(CarFactory.createSaab95(Color.green, 200, 200, 200));
+        cc.getVehicles().add(TruckFactory.createScania(Color.green, 200, 300, 200));
+        cc.getMiscs().add(MiscFactory.createVolvoMechanicShop(10, 500, 200));
+
+        // Synkar fordonens x/y-Pos med Pointens x/y
+        for(VehicleData vehObj : cc.getVehicles()){
+            vehObj.getVehicle().setxPos(vehObj.getPoint().x);
+            vehObj.getVehicle().setyPos(vehObj.getPoint().y);
         }
-        // Synkar för truckarna
-        for(TruckData truckObj : cc.getTrucks()){
-            truckObj.getTruck().setxPos(truckObj.getPoint().x);
-            truckObj.getTruck().setyPos(truckObj.getPoint().y);
-        }
+        // Synkar för miscs
         for (MiscData miscObj : cc.getMiscs()) {
             miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
             miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
@@ -56,11 +49,8 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // Updatera för alla i listan
-        for (CarData carObj : cc.getCars()){
-            g.drawImage(carObj.getImage(),carObj.getPoint().x,carObj.getPoint().y, null);
-        }
-        for (TruckData truckObj : cc.getTrucks()){
-            g.drawImage(truckObj.getImage(),truckObj.getPoint().x,truckObj.getPoint().y, null);
+        for(VehicleData vehObj : cc.getVehicles()){
+            g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
         }
         for (MiscData miscObj : cc.getMiscs()){
             g.drawImage(miscObj.getImage(),miscObj.getPoint().x,miscObj.getPoint().y, null);

@@ -1,4 +1,4 @@
-public interface TruckFeatures extends Storable {
+public interface TruckFeatures extends VehicleFeatures {
     void setxPos(double x);
     void setyPos(double y);
     void move();

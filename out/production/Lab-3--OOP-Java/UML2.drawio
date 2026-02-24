@@ -152,7 +152,7 @@
             <mxPoint x="3273" y="1998" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="gyVMj1_0Q3vv9Md4xjJm-41" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="Storable&lt;div&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="gyVMj1_0Q3vv9Md4xjJm-41" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="VehicleFeatures&lt;div&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="74" width="150" x="3323" y="1700" as="geometry" />
         </mxCell>
         <mxCell id="gyVMj1_0Q3vv9Md4xjJm-42" parent="gyVMj1_0Q3vv9Md4xjJm-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ getxPos(): double" vertex="1">
@@ -625,7 +625,7 @@
         <mxCell id="gyVMj1_0Q3vv9Md4xjJm-143" parent="1" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;dashed=1;" value="" vertex="1">
           <mxGeometry height="24" width="102" x="1822" y="1576" as="geometry" />
         </mxCell>
-        <mxCell id="gyVMj1_0Q3vv9Md4xjJm-144" parent="1" style="text;whiteSpace=wrap;html=1;" value="A extends Storable" vertex="1">
+        <mxCell id="gyVMj1_0Q3vv9Md4xjJm-144" parent="1" style="text;whiteSpace=wrap;html=1;" value="A extends VehicleFeatures" vertex="1">
           <mxGeometry height="54" width="162" x="1822" y="1576" as="geometry" />
         </mxCell>
         <mxCell id="gyVMj1_0Q3vv9Md4xjJm-145" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#008a00;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontColor=#ffffff;strokeColor=#005700;" value="MiscFeatures&lt;br&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;" vertex="1">
