@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MechanicShop<A extends Storable> implements MiscFeatures {
+public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     private List<A> objectsInShop;
     private double xPos;
     private double yPos;

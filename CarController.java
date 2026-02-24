@@ -23,18 +23,12 @@ public class CarController {
     CarView frame;
     // Listan med bilar CarData params: StorableCar, BufferedImage, Point
 
-
-    ArrayList<CarData> cars = new ArrayList<>();
+    ArrayList<VehicleData> vehicles = new ArrayList<>();
     ArrayList<MiscData> miscs = new ArrayList<>();
-    ArrayList<TruckData> trucks = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
         CarController cc = new CarController();
-
-
-        // TIDIGARE: cc.cars.add(new Volvo240(Color.black, 200));
-
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -52,197 +46,142 @@ public class CarController {
     private class TimerListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            for (CarData carObj : getCars()) {
-                CarFeatures car = carObj.getCarObj();
-                car.move();
-                int x = (int)Math.round(car.getxPos());
-                int y = (int)Math.round(car.getyPos());
+            for (VehicleData vehObj : getVehicles()) {
+                VehicleFeatures vehicle = vehObj.getVehicle();
+                vehicle.move();
+                int x = (int)Math.round(vehicle.getxPos());
+                int y = (int)Math.round(vehicle.getyPos());
                 if (x > 700) {
-                    car.setxPos(700);
-                    carBounce(car);
+                    vehicle.setxPos(700);
+                    vehicleBounce(vehicle);
                 }
                 if (x < 0) {
-                    car.setxPos(0);
-                    carBounce(car);
+                    vehicle.setxPos(0);
+                    vehicleBounce(vehicle);
                 }
                 if (y > 500) {
-                    car.setyPos(500);
-                    carBounce(car);
+                    vehicle.setyPos(500);
+                    vehicleBounce(vehicle);
                 }
                 if (y < 0) {
-                    car.setyPos(0);
-                    carBounce(car);
+                    vehicle.setyPos(0);
+                    vehicleBounce(vehicle);
                 }
 
-                frame.drawPanel.moveit(carObj, x, y);
+                frame.drawPanel.moveit(vehObj, x, y);
                 frame.drawPanel.repaint();
 
-                checkCollisionCarWorkshop(carObj);
-            }
-            for (TruckData truckObj : getTrucks()) {
-                TruckFeatures truck = truckObj.getTruck();
-                truck.move();
-                int x = (int) Math.round(truck.getxPos());
-                int y = (int) Math.round(truck.getyPos());
-
-                if (x > 700) {
-                    truck.setxPos(700);
-                    truckBounce(truck);
-                }
-                if (x < 0) {
-                    truck.setxPos(0);
-                    truckBounce(truck);
-                }
-                if (y > 500) {
-                    truck.setyPos(500);
-                    truckBounce(truck);
-                }
-                if (y < 0) {
-                    truck.setyPos(0);
-                    truckBounce(truck);
-                }
-                frame.drawPanel.moveit(truckObj,x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                checkCollisionCarWorkshop(vehObj);
             }
         }
     }
 
-    void checkCollisionCar(CarData car) {
-        checkCollisionCarWorkshop(car);
+    void checkCollisionCar(VehicleData vehicle) {
+        checkCollisionCarWorkshop(vehicle);
     }
 
-    void checkCollisionCarWorkshop(CarData car) {
+    void checkCollisionCarWorkshop(VehicleData vehicle) {
         for (MiscData misc : miscs) {
             // Distance formula
-            double deltaDistance = Math.sqrt(Math.pow((car.getCarObj().getxPos() - misc.getMiscObj().getxPos()), 2)
-                    + Math.pow((car.getCarObj().getyPos() - misc.getMiscObj().getyPos()), 2));
+            double deltaDistance = Math.sqrt(Math.pow((vehicle.getVehicle().getxPos() - misc.getMiscObj().getxPos()), 2)
+                    + Math.pow((vehicle.getVehicle().getyPos() - misc.getMiscObj().getyPos()), 2));
             if (deltaDistance < 90 && misc.getMiscObj() instanceof MechanicShop<?>) {
-                checkVolvoCollisionWorkshop(car, (MechanicShop) misc.getMiscObj());
+                checkVolvoCollisionWorkshop(vehicle, (MechanicShop) misc.getMiscObj());
             }
         }
     }
 
     // Stopped here
-    void checkVolvoCollisionWorkshop(CarData car, MechanicShop mechShop) {
-        if (car.getCarObj() instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
+    void checkVolvoCollisionWorkshop(VehicleData vehicle, MechanicShop mechShop) {
+        if (vehicle.getVehicle() instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
             System.out.println("Fungerar");
             // This is weak as fuc
-            mechShop.addToRepairList(car.getCarObj());
-            car.getPoint().setLocation(0, 0);
-            car.getCarObj().setxPos(0);
-            car.getCarObj().setyPos(0);
-            car.getCarObj().stopEngine();
+            mechShop.addToRepairList(vehicle.getVehicle());
+            vehicle.getPoint().setLocation(0, 0);
+            vehicle.getVehicle().setxPos(0);
+            vehicle.getVehicle().setyPos(0);
+            vehicle.getVehicle().stopEngine();
         }
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            car.gas(gas);
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            vehicle.gas(gas);
         }
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            truck.gas(gas);
-        }
-
     }
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            car.brake(brake);
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            vehicle.brake(brake);
         }
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            truck.brake(brake);
-        }
-    }
 
-    // Holy shit vilket bajslösning aja idgaf
+    }
     void setTurboOn() {
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            if (car instanceof TurboFeatures carWithTurbo){
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOn();
             }
         }
     }
 
     void setTurboOff() {
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            if (car instanceof TurboFeatures carWithTurbo){
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOff();
             }
         }
     }
 
     void liftFlatbed() {
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            if (truck instanceof FlatbedFeatures flatbed){
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.liftFlatbed();
             }
         }
     }
 
     void lowerFlatbed() {
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            if (truck instanceof FlatbedFeatures flatbed){
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.lowerFlatbed();
             }
         }
     }
 
     void startEngine() {
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            car.startEngine();
-        }
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            truck.startEngine();
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (CarData carObj : getCars()) {
-            CarFeatures car = carObj.getCarObj();
-            car.stopEngine();
-        }
-        for (TruckData truckObj : getTrucks()) {
-            TruckFeatures truck = truckObj.getTruck();
-            truck.stopEngine();
+        for (VehicleData vehObj : getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            vehicle.stopEngine();
         }
     }
 
-
-    public ArrayList<CarData> getCars() {
-        return cars;
+    public ArrayList<VehicleData> getVehicles() {
+        return vehicles;
     }
 
     public ArrayList<MiscData> getMiscs() {
         return miscs;
     }
 
-    public ArrayList<TruckData> getTrucks() {
-        return trucks;
+    private void vehicleBounce(VehicleFeatures vehicle) {
+        vehicle.stopEngine();
+        vehicle.turnAround();
+        vehicle.startEngine();
     }
-
-    private void carBounce(CarFeatures car) {
-        car.stopEngine();
-        car.turnAround();
-        car.startEngine();
-    }
-    private void truckBounce(TruckFeatures truck) {
-        truck.stopEngine();
-        truck.turnAround();
-        truck.startEngine();
-    }
-
 }

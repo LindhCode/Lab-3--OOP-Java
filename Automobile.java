@@ -1,5 +1,5 @@
 import java.awt.*;
-public class Automobile<E extends Engine> implements Movable, Storable {
+public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     private double currentSpeed = 0;
     private double currentRotation;
     private double xPos;
