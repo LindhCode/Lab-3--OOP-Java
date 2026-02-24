@@ -22,15 +22,24 @@ public class CarTransport extends Trailer{
     }
 
     public void loadCar(CarFeatures c) {
-        if (!rampUp && cars.size() < 10) {
+        if (loadCheck()) {
             cars.push(c);
         }
     }
 
     public CarFeatures unloadCar() {
-        if (!cars.isEmpty()) {
+        if (unloadCheck()) {
             return cars.pop();
         }
         return null;
     }
+
+    public boolean loadCheck(){
+        return !rampUp && cars.size() < 10;
+    }
+
+    public boolean unloadCheck(){
+        return !cars.isEmpty();
+    }
+
 }
