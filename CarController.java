@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -12,6 +11,11 @@ import java.util.ArrayList;
 
 public class CarController {
     // member fields:
+    private VehicleAndMiscHandling handling;
+
+    public CarController() throws IOException {
+        this.handling = new VehicleAndMiscHandling();
+    }
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
@@ -21,10 +25,7 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
-    // Listan med bilar CarData params: StorableCar, BufferedImage, Point
 
-    ArrayList<VehicleData> vehicles = new ArrayList<>();
-    ArrayList<MiscData> miscs = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Instance of this class
@@ -46,7 +47,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            for (VehicleData vehObj : getVehicles()) {
+            for (VehicleData vehObj : handling.getVehicles()) {
                 VehicleFeatures vehicle = vehObj.getVehicle();
                 vehicle.move();
                 int x = (int)Math.round(vehicle.getxPos());
@@ -81,7 +82,7 @@ public class CarController {
     }
 
     void checkCollisionCarWorkshop(VehicleData vehicle) {
-        for (MiscData misc : miscs) {
+        for (MiscData misc : handling.getMiscs()) {
             // Distance formula
             double deltaDistance = Math.sqrt(Math.pow((vehicle.getVehicle().getxPos() - misc.getMiscObj().getxPos()), 2)
                     + Math.pow((vehicle.getVehicle().getyPos() - misc.getMiscObj().getyPos()), 2));
@@ -107,7 +108,7 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             vehicle.gas(gas);
         }
@@ -115,14 +116,14 @@ public class CarController {
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             vehicle.brake(brake);
         }
 
     }
     void setTurboOn() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOn();
@@ -131,7 +132,7 @@ public class CarController {
     }
 
     void setTurboOff() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOff();
@@ -140,7 +141,7 @@ public class CarController {
     }
 
     void liftFlatbed() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.liftFlatbed();
@@ -149,7 +150,7 @@ public class CarController {
     }
 
     void lowerFlatbed() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.lowerFlatbed();
@@ -158,30 +159,26 @@ public class CarController {
     }
 
     void startEngine() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (VehicleData vehObj : getVehicles()) {
+        for (VehicleData vehObj : handling.getVehicles()) {
             VehicleFeatures vehicle = vehObj.getVehicle();
             vehicle.stopEngine();
         }
-    }
-
-    public ArrayList<VehicleData> getVehicles() {
-        return vehicles;
-    }
-
-    public ArrayList<MiscData> getMiscs() {
-        return miscs;
     }
 
     private void vehicleBounce(VehicleFeatures vehicle) {
         vehicle.stopEngine();
         vehicle.turnAround();
         vehicle.startEngine();
+    }
+
+    public VehicleAndMiscHandling getHandler(){
+        return handling;
     }
 }
