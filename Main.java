@@ -1,7 +1,12 @@
+import java.io.IOException;
+
 import static java.awt.Color.*;
 
 public class Main {
-    static void main(String[] args) {
+    static void main(String[] args) throws IOException {
+            VisualUpdate VUP = new VisualUpdate();
+            VUP.VehicleUppdate();
+
         /*
         Saab95 mySaab = new Saab95(black, 211);
         Volvo240 myVolvo = new Volvo240(black, 211);
