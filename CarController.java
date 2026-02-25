@@ -21,59 +21,39 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    //private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
 
 
-    public static void main(String[] args) throws IOException {
-        // Instance of this class
-        CarController cc = new CarController();
 
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+    public void update() {
+        for (VehicleData vehObj : handling.getVehicles()) {
+            VehicleFeatures vehicle = vehObj.getVehicle();
+            vehicle.move();
 
-        // Start the timer
-        cc.timer.start();
-    }
+            int x = (int)Math.round(vehicle.getxPos());
+            int y = (int)Math.round(vehicle.getyPos());
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-
-
-
-    private class TimerListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-            for (VehicleData vehObj : handling.getVehicles()) {
-                VehicleFeatures vehicle = vehObj.getVehicle();
-                vehicle.move();
-                int x = (int)Math.round(vehicle.getxPos());
-                int y = (int)Math.round(vehicle.getyPos());
-                if (x > 700) {
-                    vehicle.setxPos(700);
-                    vehicleBounce(vehicle);
-                }
-                if (x < 0) {
-                    vehicle.setxPos(0);
-                    vehicleBounce(vehicle);
-                }
-                if (y > 500) {
-                    vehicle.setyPos(500);
-                    vehicleBounce(vehicle);
-                }
-                if (y < 0) {
-                    vehicle.setyPos(0);
-                    vehicleBounce(vehicle);
-                }
-
-                frame.drawPanel.moveit(vehObj, x, y);
-                frame.drawPanel.repaint();
-
-                checkCollisionCarWorkshop(vehObj);
+            if (x > 700) {
+                vehicle.setxPos(700);
+                vehicleBounce(vehicle);
             }
+            if (x < 0) {
+                vehicle.setxPos(0);
+                vehicleBounce(vehicle);
+            }
+            if (y > 500) {
+                vehicle.setyPos(500);
+                vehicleBounce(vehicle);
+            }
+            if (y < 0) {
+                vehicle.setyPos(0);
+                vehicleBounce(vehicle);
+            }
+
+            checkCollisionCarWorkshop(vehObj);
         }
     }
 
