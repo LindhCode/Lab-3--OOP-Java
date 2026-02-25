@@ -17,16 +17,8 @@ public class CarController {
         this.handling = new VehicleAndMiscHandling();
     }
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    //private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
+    // Make private and a getter
     CarView frame;
-
-
 
     public void update() {
         for (VehicleData vehObj : handling.getVehicles()) {
@@ -78,7 +70,6 @@ public class CarController {
             System.out.println("Fungerar");
             // This is weak as fuc
             mechShop.addToRepairList(vehicle.getVehicle());
-            vehicle.getPoint().setLocation(0, 0);
             vehicle.getVehicle().setxPos(0);
             vehicle.getVehicle().setyPos(0);
             vehicle.getVehicle().stopEngine();

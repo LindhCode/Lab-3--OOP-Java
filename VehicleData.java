@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class VehicleData {
+    // komposition av ett internt fordon
     private VehicleFeatures vehicle;
     private BufferedImage image;
     private Point point;
