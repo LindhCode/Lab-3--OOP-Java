@@ -34,7 +34,8 @@ public class VisualUpdate {
                         int y = (int) Math.round(vehObj.getyPos());
                         System.out.println(x);
                         System.out.println(y);
-                        frame.drawPanel.moveit(handling.getVehicles().get(i), x, y);
+
+//                        frame.drawPanel.moveit(vehObj, x, y);
                     }
 
                     frame.drawPanel.repaint();

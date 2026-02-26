@@ -3,8 +3,8 @@ import java.awt.*;
 public class Saab95 implements TurboFeatures {
     private Car<TurboEngine> car;
 
-    public Saab95(Color color, int enginePower) {
-        this.car = new Car<TurboEngine>(new Automobile(color, "Saab95", new TurboEngine(enginePower), 5, 2));
+    public Saab95(Color color, int enginePower, double x, double y) {
+        this.car = new Car<TurboEngine>(new Automobile(color, "Saab95", new TurboEngine(enginePower), 5, 2, x, y));
     }
 
     public Car<TurboEngine> getCar() {

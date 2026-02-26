@@ -3,8 +3,8 @@ public class Scania implements FlatbedFeatures {
     Truck<TurboEngine> truck;
     Flatbed flatbed = new Flatbed();
 
-    public Scania(Color color, int enginePower) {
-        this.truck = new Truck<>(new Automobile<>(color, "Scania", new TurboEngine(enginePower), 2, 5));
+    public Scania(Color color, int enginePower, double x, double y) {
+        this.truck = new Truck<>(new Automobile<>(color, "Scania", new TurboEngine(enginePower), 2, 5, x, y));
     }
 
     @Override

@@ -10,12 +10,14 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     private String modelName;
     private final int size;
 
-    public Automobile(Color color, String modelName, E engine , int nrDoors, int size) {
+    public Automobile(Color color, String modelName, E engine , int nrDoors, int size, double x, double y) {
         this.color = color;
         this.modelName = modelName;
         this.engine = engine;
         this.nrDoors = nrDoors;
         this.size = size;
+        this.xPos = x;
+        this.yPos = y;
     }
 
     public void incrementSpeed(double amount){
