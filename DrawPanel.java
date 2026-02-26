@@ -10,6 +10,7 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
     CarController cc;
+    private VehicleAndMiscHandling handling;
 
     // Change this m.f.
     void moveit(VehicleData vehObj,int x, int y) {
@@ -19,6 +20,7 @@ public class DrawPanel extends JPanel{
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, CarController cc) throws IOException {
+        this.handling = new VehicleAndMiscHandling();
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -28,12 +30,12 @@ public class DrawPanel extends JPanel{
         // Här läggs alla bilar till, med bilobjekt, bild, point
 
         // Synkar fordonens x/y-Pos med Pointens x/y
-        for(VehicleData vehObj : cc.getHandler().getVehicles()){
+        for(VehicleData vehObj : handling.getVehicles()){
             vehObj.getVehicle().setxPos(vehObj.getPoint().x);
             vehObj.getVehicle().setyPos(vehObj.getPoint().y);
         }
         // Synkar för miscs
-        for (MiscData miscObj : cc.getHandler().getMiscs()) {
+        for (MiscData miscObj : handling.getMiscs()) {
             miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
             miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
         }
@@ -46,10 +48,10 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         // Updatera för alla i listan
-        for(VehicleData vehObj : cc.getHandler().getVehicles()){
+        for(VehicleData vehObj : handling.getVehicles()){
             g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
         }
-        for (MiscData miscObj : cc.getHandler().getMiscs()){
+        for (MiscData miscObj : handling.getMiscs()){
             g.drawImage(miscObj.getImage(),miscObj.getPoint().x,miscObj.getPoint().y, null);
         }
     }

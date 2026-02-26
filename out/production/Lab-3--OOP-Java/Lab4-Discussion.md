@@ -1,16 +1,16 @@
 # Laboration 4 diskussioner
 
 ## Uppgift 2: Model-View-Controller
-### Brister från utsprungliga användargränssnittet(Början av lab3)
+### Brister från ursprungliga användargränssnittet(Början av lab3)
 
-Huvudsak: 
-- Vi ser att CarController i huvudsak kommer att agera som en **Model**. Med det sagt så finns det uppenbara brister som följer nedan. 
+Huvudsak:
+- Vi ser att CarController i huvudsak kommer att agera som en **Model**. Med det sagt så finns det uppenbara brister som följer nedan.
 - Vi identifierar CarView som huvudsak en **Controller**
 - Samt DrawPanel som **view**
 
 Problematik:
 - CarController innehåller ett objekt av CarView, detta gör "Modellen" beroende av Controllern, vilket motstrider modellprinciperna.
-- CarController använder metoden moveit(), vilket skapar ett beroende mellan **Modellen** och **Vyn**. 
+- CarController använder metoden moveit(), vilket skapar ett beroende mellan **Modellen** och **Vyn**.
 - Att bilobjekten hanteras i samma Datasamling som bilderna och bildernas *Points* bryter mot MVC, eftersom bilarna ska kunna användas av olika grafiska gränssnitt - vilket inte är möjligt i nuläget pga att de binds till den grafiska representationen - JFrame
 - Vi hade ingen *Applikation* som vi körde programmet med.
 
@@ -23,6 +23,23 @@ Lösta brister:
 Olösta brister:
 - Just nu har vi klassen VehicleData - som gör att Modellen är beroende av Vyn. Våran föreslagna lösning är att VehicleData är något som specifikt används specifikt för Vyn, medan vi har en klass `InternalVehicle` eller motsvarande som används i modellen, för att sedan knytas ihop i vyn.
 
-### 
+Övriga lösningar:
+- Döpa om diverse klasser för att tydligare urskilja Model-View-Controller i projektet.
+    - CarView -> UserInputs
+    - CarController -> CarModel
+    -
+### UML-Diagrammet för att porträttera dessa förändringar
 
+
+# Lösning
+VehicleData - representerar en Vehicle från **view**
+- I den finns VehicleFeatures - kan representera Car eller Truck
+- 
+- 
+
+"Hårdkoda i form":
+
+I VehicleAndMiscHandling:
+- Komposition av `InternalVehicleAndMiscHandling`
+- 
 

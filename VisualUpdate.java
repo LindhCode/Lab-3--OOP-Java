@@ -9,9 +9,11 @@ public class VisualUpdate {
     private Timer timer;
     private CarController controller;
     private CarView frame;
+    private VehicleAndMiscHandling handling;
 
     public VisualUpdate() throws IOException {
         // Initilzie  the logic, time and frame
+        handling = new VehicleAndMiscHandling();
         controller = new CarController();
         frame = new CarView("CarSim 1.0", controller);
     }
@@ -25,7 +27,7 @@ public class VisualUpdate {
                     controller.update();
 
                     //Update position for vehicles
-                    for (VehicleData vehObj : controller.getHandler().getVehicles()) {
+                    for (VehicleData vehObj : handling.getVehicles()) {
                         int x = (int)Math.round(vehObj.getVehicle().getxPos());
                         int y = (int)Math.round(vehObj.getVehicle().getyPos());
 
