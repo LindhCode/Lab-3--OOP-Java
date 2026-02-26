@@ -45,9 +45,11 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         // Updatera för alla i listan
         for (int i = 0; i < handling.getVehicles().size(); i++) {
-            VehicleData vD = handling.getVehicles().get(i);
-            VehicleFeatures vO = cc.getVehicles().get(i);
-            g.drawImage(vD.getImage(), (int) Math.round(vO.getxPos()), (int) Math.round(vO.getyPos()), null);
+            VehicleData vehicleVisual = handling.getVehicles().get(i);
+            VehicleFeatures vehicleObject = cc.getVehicles().get(i);
+            int x = (int) Math.round(vehicleObject.getxPos());
+            int y = (int) Math.round(vehicleObject.getyPos());
+            g.drawImage(vehicleVisual.getImage(), x, y, null);
         }
 //        for(VehicleData vehObj : handling.getVehicles()){
 //            g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
@@ -56,8 +58,12 @@ public class DrawPanel extends JPanel{
 //            System.out.println("fuckk:");
 //            System.out.println("-----------------");
 //        }
-        for (MiscData miscObj : handling.getMiscs()){
-            g.drawImage(miscObj.getImage(),miscObj.getPoint().x,miscObj.getPoint().y, null);
+        for (int i = 0; i < handling.getMiscs().size(); i++) {
+            MiscData miscVisual = handling.getMiscs().get(i);
+            MiscFeatures miscObject = cc.getMiscs().get(i);
+            int x = (int) Math.round(miscObject.getxPos());
+            int y = (int) Math.round(miscObject.getyPos());
+            g.drawImage(miscVisual.getImage(), x, y, null);
         }
     }
 }
