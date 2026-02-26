@@ -59,7 +59,7 @@ public class CarController {
                 vehicleBounce(vehicle);
             }
 
-            checkCollisionCarWorkshop(vehObj);
+            checkCollisionCar(vehObj);
         }
     }
 

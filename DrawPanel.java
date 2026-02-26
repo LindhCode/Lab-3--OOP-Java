@@ -43,7 +43,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Updatera för alla i listan
         for (int i = 0; i < handling.getVehicles().size(); i++) {
             VehicleData vehicleVisual = handling.getVehicles().get(i);
             VehicleFeatures vehicleObject = cc.getVehicles().get(i);
@@ -51,13 +50,6 @@ public class DrawPanel extends JPanel{
             int y = (int) Math.round(vehicleObject.getyPos());
             g.drawImage(vehicleVisual.getImage(), x, y, null);
         }
-//        for(VehicleData vehObj : handling.getVehicles()){
-//            g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
-//            System.out.println("-----------------");
-//            System.out.println(vehObj.getPoint().x);
-//            System.out.println("fuckk:");
-//            System.out.println("-----------------");
-//        }
         for (int i = 0; i < handling.getMiscs().size(); i++) {
             MiscData miscVisual = handling.getMiscs().get(i);
             MiscFeatures miscObject = cc.getMiscs().get(i);
