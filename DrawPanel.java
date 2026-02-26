@@ -14,8 +14,7 @@ public class DrawPanel extends JPanel{
 
     // Change this m.f.
     void moveit(VehicleData vehObj,int x, int y) {
-        vehObj.getPoint().x = 500;
-        System.out.println(vehObj.getPoint().x);
+        vehObj.getPoint().x = x;
         vehObj.getPoint().y = y;
     }
 
@@ -53,6 +52,7 @@ public class DrawPanel extends JPanel{
             g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
             System.out.println("-----------------");
             System.out.println(vehObj.getPoint().x);
+            System.out.println("fuckk:");
             System.out.println("-----------------");
         }
         for (MiscData miscObj : handling.getMiscs()){
