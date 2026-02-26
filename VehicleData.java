@@ -28,6 +28,7 @@ public class VehicleData {
     }
 
     public Point getPoint() {
+        System.out.println(point);
         return point;
     }
 }

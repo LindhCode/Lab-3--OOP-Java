@@ -15,9 +15,6 @@ public class CarController {
     private ArrayList<VehicleFeatures> vehicles = new ArrayList<>();
     private ArrayList<MiscFeatures> miscs = new ArrayList<>();
 
-
-
-
     public CarController() throws IOException {
         vehicles.add(new Volvo240(Color.black,200));
         vehicles.add(new Saab95(Color.black,200));

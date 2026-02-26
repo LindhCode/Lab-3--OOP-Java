@@ -27,11 +27,14 @@ public class VisualUpdate {
                     controller.update();
 
                     //Update position for vehicles
-                    for (VehicleData vehObj : handling.getVehicles()) {
-                        int x = (int)Math.round(vehObj.getVehicle().getxPos());
-                        int y = (int)Math.round(vehObj.getVehicle().getyPos());
 
-                        frame.drawPanel.moveit(vehObj, x, y);
+                    for (int i = 0; i < controller.getVehicles().size(); i++) {
+                        VehicleFeatures vehObj  = controller.getVehicles().get(i);
+                        int x = (int) Math.round(vehObj.getxPos());
+                        int y = (int) Math.round(vehObj.getyPos());
+                        System.out.println(x);
+                        System.out.println(y);
+                        frame.drawPanel.moveit(handling.getVehicles().get(i), x, y);
                     }
 
                     frame.drawPanel.repaint();
