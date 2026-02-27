@@ -16,11 +16,10 @@ public class CarController {
     private ArrayList<MiscFeatures> miscs = new ArrayList<>();
 
     public CarController() throws IOException {
-        vehicles.add(new Volvo240(Color.black,200, 100, 200));
-        vehicles.add(new Saab95(Color.black,200, 200, 200));
-        vehicles.add(new Scania(Color.black,700, 300, 200));
-
-        miscs.add(new MechanicShop<Volvo240>(10,400, 200,"Volvo240MechanicShop"));
+        vehicles.add(CarFactory.createVolvo240(Color.black,200, 100, 200));
+        vehicles.add(CarFactory.createSaab95(Color.black,200, 200, 200));
+        vehicles.add(TruckFactory.createScania(Color.black,700, 300, 200));
+        miscs.add(MiscFactory.createVolvoMechanicShop(10,400, 200));
     }
 
     public ArrayList<VehicleFeatures> getVehicles() {
