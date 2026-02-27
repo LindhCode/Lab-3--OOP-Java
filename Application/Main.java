@@ -1,3 +1,5 @@
+package Application;
+
 import View.VisualUpdate;
 
 import java.io.IOException;

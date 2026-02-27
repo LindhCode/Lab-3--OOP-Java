@@ -17,7 +17,7 @@ Problematik:
 ### Vilka av dessa brister åtgärdade ni med er nya design från del 3? Hur då? Vilka brister åtgärdade ni inte?
 Lösta brister:
 - Vi bryter ut den visuella delen ur Model.CarModel, separerar den till en vy, som är beroende av modellen, men modellen är inte beroende av den grafiska represenationen - vilket uppfyller MVC-principerna.
-- En Applikationsklass har skapats `Main.java`, detta möjliggör applikationsspecifik kod om behovet för det finns i framtiden.
+- En Applikationsklass har skapats `Application.Main.java`, detta möjliggör applikationsspecifik kod om behovet för det finns i framtiden.
 - En lösning har skapats för att hantera moveIt()s position. Denna ligger numera i View.VisualUpdate-klassen, som hanterar all vy (som tidigare låg i Model.CarModel)
 
 Olösta brister:
