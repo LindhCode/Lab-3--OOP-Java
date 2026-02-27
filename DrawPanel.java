@@ -10,34 +10,15 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
     CarController cc;
-
-    // Change this m.f.
-    void moveit(VehicleData vehObj,int x, int y) {
-        vehObj.getPoint().x = x;
-        vehObj.getPoint().y = y;
-    }
+    private VehicleAndMiscHandling handling;
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, CarController cc) throws IOException {
+        this.handling = new VehicleAndMiscHandling();
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         this.cc = cc;
-
-        // Här läggs bilarna till
-        // Här läggs alla bilar till, med bilobjekt, bild, point
-
-        // Synkar fordonens x/y-Pos med Pointens x/y
-        for(VehicleData vehObj : cc.getHandler().getVehicles()){
-            vehObj.getVehicle().setxPos(vehObj.getPoint().x);
-            vehObj.getVehicle().setyPos(vehObj.getPoint().y);
-        }
-        // Synkar för miscs
-        for (MiscData miscObj : cc.getHandler().getMiscs()) {
-            miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
-            miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
-        }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -45,12 +26,19 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Updatera för alla i listan
-        for(VehicleData vehObj : cc.getHandler().getVehicles()){
-            g.drawImage(vehObj.getImage(),vehObj.getPoint().x,vehObj.getPoint().y, null);
+        for (int i = 0; i < handling.getVehicles().size(); i++) {
+            VehicleVisual vehicleVisual = handling.getVehicles().get(i);
+            VehicleFeatures vehicleObject = cc.getVehicles().get(i);
+            int x = (int) Math.round(vehicleObject.getxPos());
+            int y = (int) Math.round(vehicleObject.getyPos());
+            g.drawImage(vehicleVisual.getImage(), x, y, null);
         }
-        for (MiscData miscObj : cc.getHandler().getMiscs()){
-            g.drawImage(miscObj.getImage(),miscObj.getPoint().x,miscObj.getPoint().y, null);
+        for (int i = 0; i < handling.getMiscs().size(); i++) {
+            MiscData miscVisual = handling.getMiscs().get(i);
+            MiscFeatures miscObject = cc.getMiscs().get(i);
+            int x = (int) Math.round(miscObject.getxPos());
+            int y = (int) Math.round(miscObject.getyPos());
+            g.drawImage(miscVisual.getImage(), x, y, null);
         }
     }
 }

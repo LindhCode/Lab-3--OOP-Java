@@ -5,8 +5,8 @@ public class CarTransportTruck<A extends CarFeatures> {
     Truck<TurboEngine> truck;
     CarTransport transportTrailer;
 
-    public CarTransportTruck(Color color, int enginePower) {
-        this.truck = new Truck<>(new Automobile<>(color, "car transport truc", new TurboEngine(enginePower), 2, 5));
+    public CarTransportTruck(Color color, int enginePower, double x, double y) {
+        this.truck = new Truck<>(new Automobile<>(color, "car transport truc", new TurboEngine(enginePower), 2, 5, x, y));
         this.transportTrailer = new CarTransport();
     }
 

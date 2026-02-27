@@ -1,19 +1,15 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class CarData {
-    private CarFeatures car;
+public class VehicleVisual {
+    // komposition av ett internt fordon
     private BufferedImage image;
+    // Point is not used at the moment but we follow OCP
     private Point point;
 
-    public CarData(CarFeatures car, BufferedImage image, Point point){
-        this.car = car;
+    public VehicleVisual(BufferedImage image, Point point){
         this.image = image;
         this.point = point;
-    }
-
-    public CarFeatures getCarObj() {
-        return car;
     }
 
     public BufferedImage getImage() {

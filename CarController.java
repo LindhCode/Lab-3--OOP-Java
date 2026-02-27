@@ -1,7 +1,6 @@
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -9,20 +8,33 @@ import java.io.IOException;
 * modifying the model state and the updating the view.
  */
 
+
+
 public class CarController {
     // member fields:
-    private VehicleAndMiscHandling handling;
+    private ArrayList<VehicleFeatures> vehicles = new ArrayList<>();
+    private ArrayList<MiscFeatures> miscs = new ArrayList<>();
 
     public CarController() throws IOException {
-        this.handling = new VehicleAndMiscHandling();
+        vehicles.add(new Volvo240(Color.black,200, 100, 200));
+        vehicles.add(new Saab95(Color.black,200, 200, 200));
+        vehicles.add(new Scania(Color.black,700, 300, 200));
+
+        miscs.add(new MechanicShop<Volvo240>(10,400, 200,"Volvo240MechanicShop"));
     }
 
-    // Make private and a getter
-    CarView frame;
+    public ArrayList<VehicleFeatures> getVehicles() {
+        return vehicles;
+    }
+
+    public ArrayList<MiscFeatures> getMiscs() {
+        return miscs;
+    }
+
 
     public void update() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             vehicle.move();
 
             int x = (int)Math.round(vehicle.getxPos());
@@ -45,57 +57,57 @@ public class CarController {
                 vehicleBounce(vehicle);
             }
 
-            checkCollisionCarWorkshop(vehObj);
+            checkCollisionCar(vehObj);
         }
     }
 
-    void checkCollisionCar(VehicleData vehicle) {
+    void checkCollisionCar(VehicleFeatures vehicle) {
         checkCollisionCarWorkshop(vehicle);
     }
 
-    void checkCollisionCarWorkshop(VehicleData vehicle) {
-        for (MiscData misc : handling.getMiscs()) {
+    void checkCollisionCarWorkshop(VehicleFeatures vehicle) {
+        for (MiscFeatures misc : miscs){
             // Distance formula
-            double deltaDistance = Math.sqrt(Math.pow((vehicle.getVehicle().getxPos() - misc.getMiscObj().getxPos()), 2)
-                    + Math.pow((vehicle.getVehicle().getyPos() - misc.getMiscObj().getyPos()), 2));
-            if (deltaDistance < 90 && misc.getMiscObj() instanceof MechanicShop<?>) {
-                checkVolvoCollisionWorkshop(vehicle, (MechanicShop) misc.getMiscObj());
+            double deltaDistance = Math.sqrt(Math.pow((vehicle.getxPos() - misc.getxPos()), 2)
+                    + Math.pow((vehicle.getyPos() - misc.getyPos()), 2));
+            if (deltaDistance < 90 && misc instanceof MechanicShop<?>) {
+                checkVolvoCollisionWorkshop(vehicle, (MechanicShop) misc);
             }
         }
     }
 
     // Stopped here
-    void checkVolvoCollisionWorkshop(VehicleData vehicle, MechanicShop mechShop) {
-        if (vehicle.getVehicle() instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
+    void checkVolvoCollisionWorkshop(VehicleFeatures vehicle, MechanicShop mechShop) {
+        if (vehicle instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
             System.out.println("Fungerar");
             // This is weak as fuc
-            mechShop.addToRepairList(vehicle.getVehicle());
-            vehicle.getVehicle().setxPos(0);
-            vehicle.getVehicle().setyPos(0);
-            vehicle.getVehicle().stopEngine();
+            mechShop.addToRepairList(vehicle);
+            vehicle.setxPos(0);
+            vehicle.setyPos(0);
+            vehicle.stopEngine();
         }
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             vehicle.gas(gas);
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             vehicle.brake(brake);
         }
 
     }
     void setTurboOn() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOn();
             }
@@ -103,8 +115,8 @@ public class CarController {
     }
 
     void setTurboOff() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             if (vehicle instanceof TurboFeatures carWithTurbo){
                 carWithTurbo.setTurboOff();
             }
@@ -112,8 +124,8 @@ public class CarController {
     }
 
     void liftFlatbed() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.liftFlatbed();
             }
@@ -121,8 +133,8 @@ public class CarController {
     }
 
     void lowerFlatbed() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             if (vehicle instanceof FlatbedFeatures flatbed){
                 flatbed.lowerFlatbed();
             }
@@ -130,15 +142,15 @@ public class CarController {
     }
 
     void startEngine() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (VehicleData vehObj : handling.getVehicles()) {
-            VehicleFeatures vehicle = vehObj.getVehicle();
+        for (VehicleFeatures vehObj : vehicles) {
+            VehicleFeatures vehicle = vehObj;
             vehicle.stopEngine();
         }
     }
@@ -149,7 +161,4 @@ public class CarController {
         vehicle.startEngine();
     }
 
-    public VehicleAndMiscHandling getHandler(){
-        return handling;
-    }
 }
