@@ -44,7 +44,7 @@ public class DrawPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (int i = 0; i < handling.getVehicles().size(); i++) {
-            VehicleData vehicleVisual = handling.getVehicles().get(i);
+            VehicleVisual vehicleVisual = handling.getVehicles().get(i);
             VehicleFeatures vehicleObject = cc.getVehicles().get(i);
             int x = (int) Math.round(vehicleObject.getxPos());
             int y = (int) Math.round(vehicleObject.getyPos());
