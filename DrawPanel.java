@@ -12,12 +12,6 @@ public class DrawPanel extends JPanel{
     CarController cc;
     private VehicleAndMiscHandling handling;
 
-//    // Change this m.f.
-//    void moveit(VehicleFeatures vehicle,int x, int y) {
-//        vehicle.setxPos(x);
-//        vehicle.setyPos(y);
-//    }
-
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, CarController cc) throws IOException {
         this.handling = new VehicleAndMiscHandling();
@@ -25,17 +19,6 @@ public class DrawPanel extends JPanel{
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         this.cc = cc;
-
-        // Här läggs bilarna till
-        // Här läggs alla bilar till, med bilobjekt, bild, point
-
-        // Synkar fordonens x/y-Pos med Pointens x/y
-        // Synkar för miscs
-        for (MiscData miscObj : handling.getMiscs()) {
-            miscObj.getMiscObj().setxPos(miscObj.getPoint().x);
-            miscObj.getMiscObj().setyPos(miscObj.getPoint().y);
-        }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself

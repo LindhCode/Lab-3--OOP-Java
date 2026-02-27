@@ -31,8 +31,6 @@ public class CarController {
         return miscs;
     }
 
-    // Make private and a getter
-    CarView frame;
 
     public void update() {
         for (VehicleFeatures vehObj : vehicles) {
