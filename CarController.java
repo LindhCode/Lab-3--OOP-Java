@@ -19,7 +19,6 @@ public class CarController {
         vehicles.add(CarFactory.createVolvo240(Color.black,200, 100, 200));
         vehicles.add(CarFactory.createSaab95(Color.black,200, 200, 200));
         vehicles.add(TruckFactory.createScania(Color.black,700, 300, 200));
-
         miscs.add(MiscFactory.createVolvoMechanicShop(10,400, 200));
     }
 
