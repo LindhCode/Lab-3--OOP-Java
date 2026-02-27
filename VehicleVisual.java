@@ -4,22 +4,19 @@ import java.awt.image.BufferedImage;
 public class VehicleVisual {
     // komposition av ett internt fordon
     private BufferedImage image;
+    // Point is not used at the moment but we follow OCP
     private Point point;
 
     public VehicleVisual(BufferedImage image, Point point){
         this.image = image;
         this.point = point;
     }
-//    public VehicleFeatures getVehicle(){
-//        return vehicle;
-//    }
 
     public BufferedImage getImage() {
         return image;
     }
 
     public Point getPoint() {
-        System.out.println(point);
         return point;
     }
 }
