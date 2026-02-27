@@ -21,25 +21,56 @@ Lösta brister:
 - En lösning har skapats för att hantera moveIt()s position. Denna ligger numera i VisualUpdate-klassen, som hanterar all vy (som tidigare låg i CarController)
 
 Olösta brister:
-- Just nu har vi klassen VehicleData - som gör att Modellen är beroende av Vyn. Våran föreslagna lösning är att VehicleData är något som specifikt används specifikt för Vyn, medan vi har en klass `InternalVehicle` eller motsvarande som används i modellen, för att sedan knytas ihop i vyn.
+- Just nu har vi klassen VehicleData - som gör att Modellen är beroende av Vyn. Våran föreslagna lösning är att vi delar upp den grafiska hanteringen med *BufferedImage och Points* i en klass, och håller de interna fordons(och misc)-objekten till modellen. På så sätt **speglar endast** det grafiska gränssnittet den interna logiken från modellen.
 
 Övriga lösningar:
 - Döpa om diverse klasser för att tydligare urskilja Model-View-Controller i projektet.
-    - CarView -> UserInputs
-    - CarController -> CarModel
-    -
+  - CarView -> UserInputs
+  - CarController -> CarModel
+  - DrawPanel behåller namnet DrawPanel
+- Lägga klasserna ovan i packages.
 ### UML-Diagrammet för att porträttera dessa förändringar
+Finns i filträdet.
 
+# Uppgift 3: Fler designmönster
 
-# Lösning
-VehicleData - representerar en Vehicle från **view**
-- I den finns VehicleFeatures - kan representera Car eller Truck
-- 
-- 
+Observer, Factory Method, State, Composite. 
+För vart och ett av dessa fyra designmönster, svara på följande frågor:
+- [1] Finns det något ställe i er design där ni redan använder detta pattern, avsiktligt eller oavsiktligt? Vilka designproblem löste ni genom att använda det?
+- [2] Finns det något ställe där ni kan förbättra er design genom att använda detta design pattern? Vilka designproblem skulle ni lösa genom att använda det? Om inte, varför skulle er design inte förbättras av att använda det?
+- [3] Uppdatera er design med de förbättringar ni identifierat.
 
-"Hårdkoda i form":
+### Observer pattern
+#### [1]
+Svar: Vi använder i nuläget inte observer-pattern på något ställe.
 
-I VehicleAndMiscHandling:
-- Komposition av `InternalVehicleAndMiscHandling`
-- 
+#### [2]
+Svar: Vi har möjlighet att implementera Observer-pattern. Vi har en klass, DrawPanel, som reagerar på att bilarna flyttar på sig. Men istället för att vi explicit säger till att DrawPanel ska repaint() bilarna, gör vi att alla klasser som skulle kunna bry sig om att bilarnas positioner uppdateras, eller en krock sker implementerar ett interface. Exempelvis `VehicleListener`.
+- 1. Vi skapar Interfacet `VehicleListener` som har en metod, exempelvis `VehicleUpdate`
+- 2. Vi gör VisualUpdate till en **Observable** - detta innebär att VisualUpdate har en lista med alla observers, och när vi vet att CarModel har gjort alla nödvändiga uppdateringar (i vårat fall bara flyttat bilarna och kontrollerat eventuella kollisioner.) så görs ett metodanrop `notifyListeners()` (via en loop). Detta skulle inte nödvändigtvis förkorta våran kod i nuläget, men möjliggör utökning av koden markant.
+- 3. Gör så att DrawPanel implementerar `VehicleListener`
+- 4. Justera DrawPanel så att `VehicleUpdate` (från Interfacet) gör det som förväntas, ex 
+```java
+    @Override
+    public void updateVisuals() {
+        this.repaint(); 
+    }
+```
 
+### Factory Pattern
+#### [1]
+Svar: Vi använder factory methods för att skapa fordon samt miscs, avsiktligt för bådadera. Genom att använda factory i för dessa objekt följer vi DIP och OCP. 
+#### [2] 
+Svar: Vi upplever att vi inte behöver använda factory methods för de klasser som ej skapas avsiktligt av någon som använder programmet. Alternativet hade varit att ge en större del av programmets klasser factory methods men vi upplever ej att våra klasser är uppbyggda på ett sätt där det hade gjort en markant skillnad. Däremot borde vi se till att konstruktorerna till klasserna som använder factory methods är package private eftersom vi inte vill att de ska kunna instansieras direkt i applikationen.
+
+### State Pattern
+#### [1]
+Svar: Vi använder ej state i vårat program.
+#### [2]
+Svar: Genom att använda states för fordon som kan åka in i mechanicshops abstraherar vi den typen av funktionalitet. Just nu skiljer vi knappt på om en bil är i en mechanicshop eller inte, den placeras endast på en viss typ av koordinat och stannar. Genom state pattern hade vi exempelvis kunnat göra så att fordon ej kan röra på¨sig om de är i en "lagrad" state. Genom att implementera dettaa följer vi SIP bättre eftersom vi då avgränsar att ett fordon kan vara "lagrad" till skillnad från programmet idag, som inte avgränsar detta. Dessutom följer detta DIP eftersom det abstraherar de stadierna en bil kan vara i genom ett interface.
+
+### Composite Pattern
+#### [1]
+Nej Composite Pattern används varken avsiktligt eller oavsiktligt i nuläget.
+#### [2]
+Vi hittar inte något ställe där det passar i våran applikation. Detta svaret kan ändras om vi skulle få någon konkret utökning i programmet.
