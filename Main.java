@@ -1,6 +1,6 @@
-import java.io.IOException;
+import View.VisualUpdate;
 
-import static java.awt.Color.*;
+import java.io.IOException;
 
 public class Main {
     static void main(String[] args) throws IOException {
