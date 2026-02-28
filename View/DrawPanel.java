@@ -14,7 +14,6 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel implements VehicleListener{
     CarModel cc;
-    UserInputs frame;
     private VehicleAndMiscHandling handling;
 
     // Initializes the panel and reads the images

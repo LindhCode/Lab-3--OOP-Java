@@ -10,17 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class VisualUpdate {
-
     private final int delay = 50;
     private Timer timer;
     private CarModel controller;
     private UserInputs frame;
-    private VehicleAndMiscHandling handling;
+
     private ArrayList<VehicleListener> listeners = new ArrayList<>();
 
     public VisualUpdate() throws IOException {
         // Initilzie  the logic, time and frame
-        handling = new VehicleAndMiscHandling();
+
         controller = new CarModel();
         frame = new UserInputs("CarSim 1.0", controller);
 
