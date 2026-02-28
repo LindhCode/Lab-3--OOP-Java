@@ -86,6 +86,7 @@ public class CarModel {
             vehicle.setxPos(0);
             vehicle.setyPos(0);
             vehicle.stopEngine();
+            vehicle.setDriveState(new UndrivableState(vehicle));
         }
     }
 

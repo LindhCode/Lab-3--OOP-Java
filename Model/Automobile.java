@@ -11,6 +11,7 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     private int nrDoors;
     private String modelName;
     private final int size;
+    private DriveState driveState;
 
     public Automobile(Color color, String modelName, E engine , int nrDoors, int size, double x, double y) {
         this.color = color;
@@ -20,6 +21,7 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
         this.size = size;
         this.xPos = x;
         this.yPos = y;
+        this.driveState = new DriveableState(this);
     }
 
     public void incrementSpeed(double amount){
@@ -70,6 +72,11 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
         return currentRotation;
     }
 
+    @Override
+    public void setDriveState(DriveState newState) {
+        driveState = newState;
+    }
+
     public double getxPos() {
         return xPos;
     }
@@ -100,9 +107,7 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
 
     @Override
     public void move(){
-        xPos += Math.cos(getCurrentRotation()) * getCurrentSpeed();
-        yPos += Math.sin(getCurrentRotation()) * getCurrentSpeed();
-        System.out.printf("The car moved to X:%f, Y:%f\n",xPos,yPos);
+        driveState.move();
     }
 
     @Override

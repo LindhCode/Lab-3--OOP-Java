@@ -22,7 +22,13 @@ public class Scania implements FlatbedFeatures {
             flatbed.lowerFlatbed();
         }
     }
+    public double getCurrentRotation() {
+        return truck.getCurrentRotation();
+    }
 
+    public void setDriveState(DriveState newState) {
+        truck.setDriveState(newState);
+    }
     public void move(){
         if (flatbed.getFlatbedAngle() == 0){
             truck.move();
@@ -39,6 +45,12 @@ public class Scania implements FlatbedFeatures {
             truck.brake(amount);
         }
     }
+
+    @Override
+    public double getCurrentSpeed() {
+        return truck.getCurrentSpeed();
+    }
+
     public void startEngine() {
         if (flatbed.getFlatbedAngle() != 0) {
             truck.stopEngine();
