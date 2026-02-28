@@ -1,5 +1,6 @@
 package View;
 
+import Controller.UserInputs;
 import Model.CarModel;
 import Model.MiscFeatures;
 import Model.MiscVisual;
@@ -11,8 +12,9 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements VehicleListener{
     CarModel cc;
+    UserInputs frame;
     private VehicleAndMiscHandling handling;
 
     // Initializes the panel and reads the images
@@ -24,8 +26,11 @@ public class DrawPanel extends JPanel{
         this.cc = cc;
     }
 
+    public void updateVisuals(){
+        repaint();
+    }
+
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

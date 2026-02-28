@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class VisualUpdate {
 
@@ -15,13 +16,24 @@ public class VisualUpdate {
     private CarModel controller;
     private UserInputs frame;
     private VehicleAndMiscHandling handling;
+    private ArrayList<VehicleListener> listeners = new ArrayList<>();
 
     public VisualUpdate() throws IOException {
         // Initilzie  the logic, time and frame
         handling = new VehicleAndMiscHandling();
         controller = new CarModel();
         frame = new UserInputs("CarSim 1.0", controller);
+
+        // Lägger till alla listeners
+        listeners.add(frame.drawPanel);
     }
+
+    public void notifyListeners(){
+        for(VehicleListener v : listeners){
+            v.updateVisuals();
+        }
+    }
+
 
     public void VehicleUppdate(){
 
@@ -29,7 +41,7 @@ public class VisualUpdate {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     controller.update();
-                    frame.drawPanel.repaint();
+                    notifyListeners();
                 }
             });
 
