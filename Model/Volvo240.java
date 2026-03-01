@@ -9,6 +9,14 @@ public class Volvo240 implements CarFeatures {
         this.car = new Car<RegularEngine>(new Automobile(color, "Model.Saab95", new RegularEngine(enginePower), 5, 2, x, y));
     }
 
+    public double getCurrentRotation() {
+        return car.getCurrentRotation();
+    }
+
+    public void setDriveState(DriveState newState) {
+        car.setDriveState(newState);
+    }
+
     public Car<RegularEngine> getCar() {
         return car;
     }

@@ -4,15 +4,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/*
-* This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
- */
-
-
-
-public class CarModel {
+public class CarModel implements CarManager {
     // member fields:
     private ArrayList<VehicleFeatures> vehicles = new ArrayList<>();
     private ArrayList<MiscFeatures> miscs = new ArrayList<>();
@@ -83,9 +75,10 @@ public class CarModel {
             System.out.println("Fungerar");
             // This is weak as fuc
             mechShop.addToRepairList(vehicle);
-            vehicle.setxPos(0);
+            vehicle.setxPos((mechShop.getObjectsInShop().size()-1)*100);
             vehicle.setyPos(0);
             vehicle.stopEngine();
+            vehicle.setDriveState(new UndrivableState(vehicle));
         }
     }
 
@@ -161,17 +154,21 @@ public class CarModel {
         vehicle.turnAround();
         vehicle.startEngine();
     }
-    public void addCar(){
-        if (vehicles.size() < 10){
-            vehicles.add(CarFactory.createSaab95(Color.black,200,400,400));
-        }
 
-    }
-    public void removeCar(){
-        if (vehicles.size() < 1){
-        vehicles.remove(vehicles.size());
+
+    public void removeCar() {
+        if (!vehicles.isEmpty()) {
+            vehicles.remove(vehicles.size() -1 );
         }
     }
 
+    public void addCar(int x, int y) {
+        if (canAddCar()){
+            vehicles.add(CarFactory.createVolvo240(Color.black,200, x, y));
+        }
+    }
 
+    public boolean canAddCar(){
+        return vehicles.size() < 10;
+    }
 }

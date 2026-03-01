@@ -67,6 +67,14 @@ public class Saab95 implements TurboFeatures {
         return car.getCurrentSpeed();
     }
 
+    public double getCurrentRotation() {
+        return car.getCurrentRotation();
+    }
+
+    public void setDriveState(DriveState newState) {
+        car.setDriveState(newState);
+    }
+
     @Override
     public void setTurboOn() {
         getCar().getAutomobile().getEngine().setTurboOn();

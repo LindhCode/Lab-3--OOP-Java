@@ -64,4 +64,12 @@ public class Car<E extends Engine> implements CarFeatures {
     public double getCurrentSpeed() {
         return automobile.getCurrentSpeed();
     }
+
+    public double getCurrentRotation() {
+        return automobile.getCurrentRotation();
+    }
+
+    public void setDriveState(DriveState newState) {
+        automobile.setDriveState(newState);
+    }
 }

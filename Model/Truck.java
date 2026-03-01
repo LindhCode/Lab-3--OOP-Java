@@ -11,6 +11,14 @@ public class Truck<E extends Engine> implements TruckFeatures{
         return automobile.getCurrentSpeed();
     }
 
+    public double getCurrentRotation() {
+        return automobile.getCurrentRotation();
+    }
+
+    public void setDriveState(DriveState newState) {
+        automobile.setDriveState(newState);
+    }
+
     public double getyPos() {
         return automobile.getyPos();
     }

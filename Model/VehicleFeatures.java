@@ -11,4 +11,8 @@ public interface VehicleFeatures {
     void stopEngine();
     void gas(double i);
     void brake(double i);
+    double getCurrentSpeed();
+    double getCurrentRotation();
+
+    void setDriveState(DriveState newState);
 }
