@@ -45,7 +45,8 @@ public class UserInputs extends JFrame{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
-
+    JButton addCar = new JButton("Add car");
+    JButton removeCar = new JButton("Remove car");
     // Constructor
     public UserInputs(String framename, CarModel cc) throws IOException {
         this.carC = cc;
@@ -91,6 +92,8 @@ public class UserInputs extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCar,6);
+        controlPanel.add(removeCar,7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -156,6 +159,16 @@ public class UserInputs extends JFrame{
                 carC.stopEngine();
             }
         });
+        addCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {carC.addCar();
+            }
+        });
+        removeCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {carC.removeCar();}
+        });
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 

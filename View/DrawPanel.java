@@ -18,7 +18,7 @@ public class DrawPanel extends JPanel implements VehicleListener{
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, CarModel cc) throws IOException {
-        this.handling = new VehicleAndMiscHandling();
+        this.handling = new VehicleAndMiscHandling(cc);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);

@@ -161,5 +161,17 @@ public class CarModel {
         vehicle.turnAround();
         vehicle.startEngine();
     }
+    public void addCar(){
+        if (vehicles.size() < 10){
+            vehicles.add(CarFactory.createSaab95(Color.black,200,400,400));
+        }
+
+    }
+    public void removeCar(){
+        if (vehicles.size() < 1){
+        vehicles.remove(vehicles.size());
+        }
+    }
+
 
 }
