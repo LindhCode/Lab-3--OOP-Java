@@ -176,7 +176,7 @@ public class UserInputs extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 for(AddsCar a : listeners){
-                    a.addCar(r.nextInt(100,600), r.nextInt(100,600));
+                    a.addCar(r.nextInt(100,500), r.nextInt(100,500));
                 }
             }
         });
