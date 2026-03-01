@@ -1,6 +1,6 @@
 package Model;
 
-public class RegularEngine extends Engine{
+public class RegularEngine extends Engine {
     public RegularEngine(int enginePower) {
         super(enginePower);
     }

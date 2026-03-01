@@ -1,6 +1,6 @@
 package Model;
 
-public class UndrivableState implements DriveState  {
+public class UndrivableState implements DriveState {
     VehicleFeatures vehicle;
 
     public UndrivableState(VehicleFeatures vehicle) {
@@ -9,6 +9,5 @@ public class UndrivableState implements DriveState  {
 
     @Override
     public void move() {
-        System.out.println("The car can not be moved at this point");
     }
 }

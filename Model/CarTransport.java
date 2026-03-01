@@ -2,15 +2,15 @@ package Model;
 
 import java.util.Stack;
 
-public class CarTransport extends Trailer{
+public class CarTransport extends Trailer {
     private boolean rampUp = true;
     Stack<CarFeatures> cars = new Stack<>();
 
-    public void lowerRamp(){
+    public void lowerRamp() {
         rampUp = false;
     }
 
-    public void liftRamp(){
+    public void liftRamp() {
         rampUp = true;
     }
 
@@ -35,11 +35,11 @@ public class CarTransport extends Trailer{
         return null;
     }
 
-    public boolean loadCheck(){
+    public boolean loadCheck() {
         return !rampUp && cars.size() < 10;
     }
 
-    public boolean unloadCheck(){
+    public boolean unloadCheck() {
         return !cars.isEmpty();
     }
 

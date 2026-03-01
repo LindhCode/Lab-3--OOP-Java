@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.*;
+
 public class Scania implements FlatbedFeatures {
     Truck<TurboEngine> truck;
     Flatbed flatbed = new Flatbed();
@@ -22,26 +23,34 @@ public class Scania implements FlatbedFeatures {
             flatbed.lowerFlatbed();
         }
     }
+
+    @Override
     public double getCurrentRotation() {
         return truck.getCurrentRotation();
     }
 
+    @Override
     public void setDriveState(DriveState newState) {
         truck.setDriveState(newState);
     }
-    public void move(){
-        if (flatbed.getFlatbedAngle() == 0){
+
+    @Override
+    public void move() {
+        if (flatbed.getFlatbedAngle() == 0) {
             truck.move();
         }
     }
-    public void gas(double amount){
-        if (flatbed.getFlatbedAngle() == 0){
+
+    @Override
+    public void gas(double amount) {
+        if (flatbed.getFlatbedAngle() == 0) {
             truck.gas(amount);
         }
     }
 
-    public void brake(double amount){
-        if (flatbed.getFlatbedAngle() == 0){
+    @Override
+    public void brake(double amount) {
+        if (flatbed.getFlatbedAngle() == 0) {
             truck.brake(amount);
         }
     }
@@ -51,6 +60,7 @@ public class Scania implements FlatbedFeatures {
         return truck.getCurrentSpeed();
     }
 
+    @Override
     public void startEngine() {
         if (flatbed.getFlatbedAngle() != 0) {
             truck.stopEngine();
@@ -59,25 +69,30 @@ public class Scania implements FlatbedFeatures {
         }
     }
 
-    public void turnLeft(){
+    public void turnLeft() {
         truck.turnLeft();
     }
 
-    public void turnRight(){
+    public void turnRight() {
         truck.turnRight();
     }
 
-    public void turnAround(){
+    @Override
+    public void turnAround() {
         truck.turnAround();
     }
-    public void stopEngine(){
+
+    @Override
+    public void stopEngine() {
         truck.stopEngine();
     }
 
+    @Override
     public double getxPos() {
         return truck.getxPos();
     }
 
+    @Override
     public double getyPos() {
         return truck.getyPos();
     }

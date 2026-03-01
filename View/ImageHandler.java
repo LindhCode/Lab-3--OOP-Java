@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ImageHandler{
+public class ImageHandler {
     public static final BufferedImage VOLVO240_IMAGE;
     public static final BufferedImage SAAB95_IMAGE;
     public static final BufferedImage SCANIA_IMAGE;

@@ -18,32 +18,29 @@ public class VisualUpdate {
     private ArrayList<VehicleListener> listeners = new ArrayList<>();
 
     public VisualUpdate() throws IOException {
-        // Initilzie  the logic, time and frame
-
         controller = new CarModel();
         frame = new UserInputs("CarSim 1.0", controller);
 
-        // Lägger till alla listeners
         listeners.add(frame.drawPanel);
     }
 
-    public void notifyListeners(){
-        for(VehicleListener v : listeners){
+    public void notifyListeners() {
+        for (VehicleListener v : listeners) {
             v.updateVisuals();
         }
     }
 
 
-    public void VehicleUppdate(){
+    public void VehicleUppdate() {
 
         timer = new Timer(delay, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.update();
-                    notifyListeners();
-                }
-            });
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.update();
+                notifyListeners();
+            }
+        });
 
-            timer.start();
-        }
+        timer.start();
+    }
 }

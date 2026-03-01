@@ -2,7 +2,7 @@ package Model;
 
 import java.lang.classfile.Attribute;
 
-public class DriveableState implements DriveState{
+public class DriveableState implements DriveState {
     VehicleFeatures vehicle;
 
     public DriveableState(VehicleFeatures vehicle) {

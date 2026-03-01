@@ -8,7 +8,7 @@ public class TruckData {
     private BufferedImage image;
     private Point point;
 
-    public TruckData(TruckFeatures truck, BufferedImage image, Point point){
+    public TruckData(TruckFeatures truck, BufferedImage image, Point point) {
         this.truck = truck;
         this.image = image;
         this.point = point;

@@ -7,7 +7,7 @@ public class MiscVisual<A extends MiscFeatures> {
     private BufferedImage image;
     private Point point;
 
-    public MiscVisual(MiscFeatures misc, BufferedImage image, Point point){
+    public MiscVisual(MiscFeatures misc, BufferedImage image, Point point) {
         this.image = image;
         this.point = point;
     }

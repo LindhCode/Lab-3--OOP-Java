@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class VehicleAndMiscHandling implements CarManager {
     private static ArrayList<VehicleVisual> vehicles;
     private static ArrayList<MiscVisual> miscs;
-    
-    
+
+
     public VehicleAndMiscHandling() throws IOException {
         vehicles = new ArrayList<>();
-        miscs  = new ArrayList<>();
+        miscs = new ArrayList<>();
         CarModel cc = new CarModel();
 
         vehicles.add(new VehicleVisual(ImageHandler.VOLVO240_IMAGE, new Point(100, 200)));
@@ -36,8 +36,10 @@ public class VehicleAndMiscHandling implements CarManager {
     }
 
     @Override
-    public void removeCar(){
-        vehicles.removeLast();
+    public void removeCar() {
+        if (!vehicles.isEmpty()) {
+            vehicles.removeLast();
+        }
     }
 
     public ArrayList<VehicleVisual> getVehicles() {

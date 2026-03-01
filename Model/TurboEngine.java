@@ -1,21 +1,21 @@
 package Model;
 
-public class TurboEngine extends Engine{
+public class TurboEngine extends Engine {
     private boolean turboOn = true;
 
     public TurboEngine(int enginePower) {
         super(enginePower);
     }
 
-    public void setTurboOn(){
+    public void setTurboOn() {
         turboOn = true;
     }
 
-    public void setTurboOff(){
+    public void setTurboOff() {
         turboOn = false;
     }
 
-    public double speedFactor(){
+    public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;

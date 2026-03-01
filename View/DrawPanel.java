@@ -13,7 +13,6 @@ public class DrawPanel extends JPanel implements VehicleListener {
     CarModel cc;
     private VehicleAndMiscHandling handling;
 
-    // Initializes the panel and reads the images
     public DrawPanel(int x, int y, CarModel cc) throws IOException {
         this.handling = new VehicleAndMiscHandling();
         this.setDoubleBuffered(true);
@@ -23,17 +22,14 @@ public class DrawPanel extends JPanel implements VehicleListener {
     }
 
     @Override
-    public void updateVisuals(){
+    public void updateVisuals() {
         repaint();
     }
 
 
-
-    // This method is called each time the panel updates/refreshes/repaints itself
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println(handling.getVehicles().size());
         for (int i = 0; i < handling.getVehicles().size(); i++) {
             VehicleVisual vehicleVisual = handling.getVehicles().get(i);
             VehicleFeatures vehicleObject = cc.getVehicles().get(i);

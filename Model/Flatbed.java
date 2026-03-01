@@ -1,6 +1,6 @@
 package Model;
 
-public class Flatbed extends Trailer{
+public class Flatbed extends Trailer {
     private int flatbedAngle = 0;
 
     public void liftFlatbed() {

@@ -1,3 +1,4 @@
 package Model;
 
-abstract class Trailer { }
+abstract class Trailer {
+}

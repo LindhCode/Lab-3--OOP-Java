@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.*;
+
 public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     private double currentSpeed = 0;
     private double currentRotation;
@@ -13,7 +14,7 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     private final int size;
     private DriveState driveState;
 
-    public Automobile(Color color, String modelName, E engine , int nrDoors, int size, double x, double y) {
+    public Automobile(Color color, String modelName, E engine, int nrDoors, int size, double x, double y) {
         this.color = color;
         this.modelName = modelName;
         this.engine = engine;
@@ -24,50 +25,57 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
         this.driveState = new DriveableState(this);
     }
 
-    public void incrementSpeed(double amount){
+    public void incrementSpeed(double amount) {
         if (currentSpeed != 0) {
             currentSpeed = getCurrentSpeed() + engine.speedFactor() * amount;
             if (currentSpeed < 0.1) {
                 currentSpeed = 0.1;
-            }
-            else if (currentSpeed > engine.getEnginePower()){
+            } else if (currentSpeed > engine.getEnginePower()) {
                 currentSpeed = engine.getEnginePower();
             }
         }
     }
 
-    public void startEngine(){
+    @Override
+    public void startEngine() {
         currentSpeed = 0.1;
     }
 
-    public void stopEngine(){
+    @Override
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
+    @Override
     public void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
     }
 
+    @Override
     public void brake(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(-amount);
         }
     }
 
+    @Override
     public void setxPos(double x) {
         xPos = x;
     }
 
+    @Override
     public void setyPos(double y) {
         yPos = y;
     }
 
+    @Override
     public double getCurrentSpeed() {
         return currentSpeed;
     }
 
+    @Override
     public double getCurrentRotation() {
         return currentRotation;
     }
@@ -77,10 +85,12 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
         driveState = newState;
     }
 
+    @Override
     public double getxPos() {
         return xPos;
     }
 
+    @Override
     public double getyPos() {
         return yPos;
     }
@@ -106,28 +116,29 @@ public class Automobile<E extends Engine> implements Movable, VehicleFeatures {
     }
 
     @Override
-    public void move(){
+    public void move() {
         driveState.move();
     }
 
     @Override
-    public void turnLeft(){
-        currentRotation += (Math.PI/12);
-        currentRotation %= (2*Math.PI);
-    }
-    @Override
-    public void turnAround(){
-        currentRotation += (Math.PI);
-        currentRotation %= (2*Math.PI);
+    public void turnLeft() {
+        currentRotation += (Math.PI / 12);
+        currentRotation %= (2 * Math.PI);
     }
 
     @Override
-    public void turnRight(){
+    public void turnAround() {
+        currentRotation += (Math.PI);
+        currentRotation %= (2 * Math.PI);
+    }
+
+    @Override
+    public void turnRight() {
         double prevRad = currentRotation;
-        currentRotation -= (Math.PI/12);
-        currentRotation %= (2*Math.PI);
+        currentRotation -= (Math.PI / 12);
+        currentRotation %= (2 * Math.PI);
         if (currentRotation < 0 && prevRad >= 0) {
-            currentRotation += 2*Math.PI;
+            currentRotation += 2 * Math.PI;
         }
     }
 }

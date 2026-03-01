@@ -11,9 +11,7 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     private int capacity;
     private String tag;
 
-    // I feel like poop writing the tag paramter
-    // It is such a quick fix inerting a new parameter just to check generic type
-    public MechanicShop(int capacity, double xPos, double yPos, String tag){
+    public MechanicShop(int capacity, double xPos, double yPos, String tag) {
         this.objectsInShop = new ArrayList<>(capacity);
         this.capacity = capacity;
         this.xPos = xPos;
@@ -25,34 +23,38 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
         return objectsInShop;
     }
 
+    @Override
     public String getTag() {
         return tag;
     }
 
-    public void addToRepairList(A repairObject){
-        if(posCheck(repairObject) && getObjectsInShop().size() != capacity){
+    public void addToRepairList(A repairObject) {
+        if (getObjectsInShop().size() != capacity) {
             objectsInShop.add(repairObject);
-        }
-        else{
+            repairObject.setxPos((getObjectsInShop().size() - 1) * 100);
+            repairObject.setyPos(0);
+            repairObject.stopEngine();
+        } else {
             System.out.println("Can't add object to the shop!");
         }
     }
 
-    public A removeFromRepair(int spot){
-        if (carInShop(spot))  {
+    public A removeFromRepair(int spot) {
+        if (carInShop(spot)) {
             A car = getObjectsInShop().get(spot);
             removeCar(spot);
             return car;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
+    @Override
     public double getxPos() {
         return xPos;
     }
 
+    @Override
     public double getyPos() {
         return yPos;
     }
@@ -61,19 +63,17 @@ public class MechanicShop<A extends VehicleFeatures> implements MiscFeatures {
     public void setxPos(double x) {
         xPos = x;
     }
+
     @Override
     public void setyPos(double y) {
         yPos = y;
     }
 
-    public boolean posCheck(A repairObject){
-        return Math.abs(repairObject.getxPos() - this.xPos) <= 10 && Math.abs(repairObject.getyPos() - this.yPos) <= 10;
-    }
-
-    public boolean carInShop(int spot){
+    public boolean carInShop(int spot) {
         return getObjectsInShop().size() >= spot;
     }
-    public void removeCar(int spot){
-        getObjectsInShop().remove(spot-1);
+
+    public void removeCar(int spot) {
+        getObjectsInShop().remove(spot - 1);
     }
 }

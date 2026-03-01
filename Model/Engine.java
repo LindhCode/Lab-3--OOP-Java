@@ -1,20 +1,19 @@
 package Model;
 
-public class Engine{
+public class Engine {
     protected int enginePower;
 
     public Engine(int enginePower) {
         this.enginePower = enginePower;
     }
 
-    public double speedFactor(){
+    public double speedFactor() {
         return enginePower * 0.01;
     }
 
-    public double getEnginePower(){
+    public double getEnginePower() {
         return enginePower;
     }
-
 
 
 }

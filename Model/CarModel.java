@@ -5,15 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CarModel implements CarManager {
-    // member fields:
     private ArrayList<VehicleFeatures> vehicles = new ArrayList<>();
     private ArrayList<MiscFeatures> miscs = new ArrayList<>();
 
     public CarModel() throws IOException {
-        vehicles.add(CarFactory.createVolvo240(Color.black,200, 100, 200));
-        vehicles.add(CarFactory.createSaab95(Color.black,200, 200, 200));
-        vehicles.add(TruckFactory.createScania(Color.black,700, 300, 200));
-        miscs.add(MiscFactory.createVolvoMechanicShop(10,400, 200));
+        vehicles.add(CarFactory.createVolvo240(Color.black, 200, 100, 200));
+        vehicles.add(CarFactory.createSaab95(Color.black, 200, 200, 200));
+        vehicles.add(TruckFactory.createScania(Color.black, 700, 300, 200));
+        miscs.add(MiscFactory.createVolvoMechanicShop(10, 400, 200));
     }
 
     public ArrayList<VehicleFeatures> getVehicles() {
@@ -30,8 +29,8 @@ public class CarModel implements CarManager {
             VehicleFeatures vehicle = vehObj;
             vehicle.move();
 
-            int x = (int)Math.round(vehicle.getxPos());
-            int y = (int)Math.round(vehicle.getyPos());
+            int x = (int) Math.round(vehicle.getxPos());
+            int y = (int) Math.round(vehicle.getyPos());
 
             if (x > 700) {
                 vehicle.setxPos(700);
@@ -59,7 +58,7 @@ public class CarModel implements CarManager {
     }
 
     void checkCollisionCarWorkshop(VehicleFeatures vehicle) {
-        for (MiscFeatures misc : miscs){
+        for (MiscFeatures misc : miscs) {
             // Distance formula
             double deltaDistance = Math.sqrt(Math.pow((vehicle.getxPos() - misc.getxPos()), 2)
                     + Math.pow((vehicle.getyPos() - misc.getyPos()), 2));
@@ -69,15 +68,10 @@ public class CarModel implements CarManager {
         }
     }
 
-    // Stopped here
     void checkVolvoCollisionWorkshop(VehicleFeatures vehicle, MechanicShop mechShop) {
         if (vehicle instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
             System.out.println("Fungerar");
-            // This is weak as fuc
             mechShop.addToRepairList(vehicle);
-            vehicle.setxPos((mechShop.getObjectsInShop().size()-1)*100);
-            vehicle.setyPos(0);
-            vehicle.stopEngine();
             vehicle.setDriveState(new UndrivableState(vehicle));
         }
     }
@@ -99,10 +93,11 @@ public class CarModel implements CarManager {
         }
 
     }
+
     public void setTurboOn() {
         for (VehicleFeatures vehObj : vehicles) {
             VehicleFeatures vehicle = vehObj;
-            if (vehicle instanceof TurboFeatures carWithTurbo){
+            if (vehicle instanceof TurboFeatures carWithTurbo) {
                 carWithTurbo.setTurboOn();
             }
         }
@@ -111,7 +106,7 @@ public class CarModel implements CarManager {
     public void setTurboOff() {
         for (VehicleFeatures vehObj : vehicles) {
             VehicleFeatures vehicle = vehObj;
-            if (vehicle instanceof TurboFeatures carWithTurbo){
+            if (vehicle instanceof TurboFeatures carWithTurbo) {
                 carWithTurbo.setTurboOff();
             }
         }
@@ -120,7 +115,7 @@ public class CarModel implements CarManager {
     public void liftFlatbed() {
         for (VehicleFeatures vehObj : vehicles) {
             VehicleFeatures vehicle = vehObj;
-            if (vehicle instanceof FlatbedFeatures flatbed){
+            if (vehicle instanceof FlatbedFeatures flatbed) {
                 flatbed.liftFlatbed();
             }
         }
@@ -129,7 +124,7 @@ public class CarModel implements CarManager {
     public void lowerFlatbed() {
         for (VehicleFeatures vehObj : vehicles) {
             VehicleFeatures vehicle = vehObj;
-            if (vehicle instanceof FlatbedFeatures flatbed){
+            if (vehicle instanceof FlatbedFeatures flatbed) {
                 flatbed.lowerFlatbed();
             }
         }
@@ -155,20 +150,22 @@ public class CarModel implements CarManager {
         vehicle.startEngine();
     }
 
-
+    @Override
     public void removeCar() {
         if (!vehicles.isEmpty()) {
-            vehicles.remove(vehicles.size() -1 );
+            vehicles.remove(vehicles.size() - 1);
         }
     }
 
+    @Override
     public void addCar(int x, int y) {
-        if (canAddCar()){
-            vehicles.add(CarFactory.createVolvo240(Color.black,200, x, y));
+        if (canAddCar()) {
+            vehicles.add(CarFactory.createVolvo240(Color.black, 200, x, y));
         }
     }
 
-    public boolean canAddCar(){
+    @Override
+    public boolean canAddCar() {
         return vehicles.size() < 10;
     }
 }
