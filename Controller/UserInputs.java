@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.AddsCar;
 import Model.CarModel;
 import View.DrawPanel;
+import View.VehicleAndMiscHandling;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -10,6 +12,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -20,13 +24,18 @@ import java.io.IOException;
  **/
 
 public class UserInputs extends JFrame{
+    Random r = new Random();
+
     private static final int X = 800;
     private static final int Y = 800;
 
+    ArrayList<AddsCar> listeners = new ArrayList<>();
     // The controller member
     CarModel carC;
 
     public DrawPanel drawPanel;
+
+    VehicleAndMiscHandling handler;
 
     JPanel controlPanel = new JPanel();
 
@@ -42,6 +51,7 @@ public class UserInputs extends JFrame{
     JButton turboOffButton = new JButton("Saab Turbo off");
     JButton liftBedButton = new JButton("Model.Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
+    JButton addCarButton = new JButton("Add Car");
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
@@ -49,8 +59,12 @@ public class UserInputs extends JFrame{
     // Constructor
     public UserInputs(String framename, CarModel cc) throws IOException {
         this.carC = cc;
+        this.handler = new VehicleAndMiscHandling();
         this.drawPanel = new DrawPanel(X, Y-240,cc);
         initComponents(framename);
+
+        listeners.add(cc);
+        listeners.add(handler);
     }
 
     // Sets everything in place and fits everything
@@ -91,6 +105,7 @@ public class UserInputs extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 6);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -154,6 +169,15 @@ public class UserInputs extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopEngine();
+            }
+        });
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                for(AddsCar a : listeners){
+                    a.addCar(r.nextInt(100,600), r.nextInt(100,600));
+                }
             }
         });
         // Make the frame pack all it's components by respecting the sizes if possible.
