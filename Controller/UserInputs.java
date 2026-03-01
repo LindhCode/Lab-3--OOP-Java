@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.AddsCar;
+import Model.CarManager;
 import Model.CarModel;
 import View.DrawPanel;
 import View.VehicleAndMiscHandling;
@@ -29,7 +29,8 @@ public class UserInputs extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
-    ArrayList<AddsCar> listeners = new ArrayList<>();
+    ArrayList<CarManager> listeners = new ArrayList<>();
+
     // The controller member
     CarModel carC;
 
@@ -52,7 +53,7 @@ public class UserInputs extends JFrame{
     JButton liftBedButton = new JButton("Model.Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton addCarButton = new JButton("Add Car");
-
+    JButton removeCarButton = new JButton("Remove Car");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
@@ -105,7 +106,9 @@ public class UserInputs extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+
         controlPanel.add(addCarButton, 6);
+        controlPanel.add(removeCarButton,7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -171,16 +174,30 @@ public class UserInputs extends JFrame{
                 carC.stopEngine();
             }
         });
+
+
+
+
         addCarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                for(AddsCar a : listeners){
+                for(CarManager a : listeners){
                     a.addCar(r.nextInt(100,500), r.nextInt(100,500));
                 }
             }
         });
-        // Make the frame pack all it's components by respecting the sizes if possible.
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (CarManager a : listeners){
+                    a.removeCar();
+                }
+            }
+        });
+
+
+                // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
         // Get the computer screen resolution

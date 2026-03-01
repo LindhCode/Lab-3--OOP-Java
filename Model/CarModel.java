@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CarModel implements AddsCar{
+public class CarModel implements CarManager {
     // member fields:
     private ArrayList<VehicleFeatures> vehicles = new ArrayList<>();
     private ArrayList<MiscFeatures> miscs = new ArrayList<>();
@@ -153,6 +153,13 @@ public class CarModel implements AddsCar{
         vehicle.stopEngine();
         vehicle.turnAround();
         vehicle.startEngine();
+    }
+
+
+    public void removeCar() {
+        if (!vehicles.isEmpty()) {
+            vehicles.remove(vehicles.size() -1 );
+        }
     }
 
     public void addCar(int x, int y) {

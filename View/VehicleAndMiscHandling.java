@@ -1,18 +1,12 @@
 package View;
 
-import Model.AddsCar;
-import Model.CarModel;
-import Model.MiscVisual;
-import Model.VehicleFeatures;
+import Model.*;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class VehicleAndMiscHandling implements AddsCar {
+public class VehicleAndMiscHandling implements CarManager {
     private static ArrayList<VehicleVisual> vehicles;
     private static ArrayList<MiscVisual> miscs;
     
@@ -39,6 +33,11 @@ public class VehicleAndMiscHandling implements AddsCar {
     @Override
     public boolean canAddCar() {
         return vehicles.size() < 10;
+    }
+
+    @Override
+    public void removeCar(){
+        vehicles.removeLast();
     }
 
     public ArrayList<VehicleVisual> getVehicles() {
