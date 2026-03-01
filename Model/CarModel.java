@@ -70,7 +70,6 @@ public class CarModel implements CarManager {
 
     void checkVolvoCollisionWorkshop(VehicleFeatures vehicle, MechanicShop mechShop) {
         if (vehicle instanceof Volvo240 && mechShop.getTag().equals("Volvo240MechanicShop")) {
-            System.out.println("Fungerar");
             mechShop.addToRepairList(vehicle);
             vehicle.setDriveState(new UndrivableState(vehicle));
         }
