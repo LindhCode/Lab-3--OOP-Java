@@ -59,7 +59,6 @@ public class CarModel implements CarManager {
 
     void checkCollisionCarWorkshop(VehicleFeatures vehicle) {
         for (MiscFeatures misc : miscs) {
-            // Distance formula
             double deltaDistance = Math.sqrt(Math.pow((vehicle.getxPos() - misc.getxPos()), 2)
                     + Math.pow((vehicle.getyPos() - misc.getyPos()), 2));
             if (deltaDistance < 90 && misc instanceof MechanicShop<?>) {
