@@ -4,6 +4,7 @@ import Controller.UserInputs;
 import Model.CarModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,12 +15,15 @@ public class VisualUpdate {
     private Timer timer;
     private CarModel controller;
     private UserInputs frame;
+    private WindowView win;
 
     private ArrayList<VehicleListener> listeners = new ArrayList<>();
 
     public VisualUpdate() throws IOException {
         controller = new CarModel();
-        frame = new UserInputs("CarSim 1.0", controller);
+        win = new WindowView();
+
+        frame = new UserInputs(win, controller);
 
         listeners.add(frame.drawPanel);
     }

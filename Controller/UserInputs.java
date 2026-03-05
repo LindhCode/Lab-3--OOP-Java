@@ -4,6 +4,7 @@ import Model.CarManager;
 import Model.CarModel;
 import View.DrawPanel;
 import View.VehicleAndMiscHandling;
+import View.WindowView;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -15,11 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class UserInputs extends JFrame {
+public class UserInputs {
     Random r = new Random();
-
-    private static final int X = 800;
-    private static final int Y = 800;
 
     ArrayList<CarManager> listeners = new ArrayList<>();
 
@@ -49,26 +47,20 @@ public class UserInputs extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public UserInputs(String framename, CarModel cc) throws IOException {
+    public UserInputs(WindowView win, CarModel cc) throws IOException {
         this.carC = cc;
-        this.handler = new VehicleAndMiscHandling();
-        this.drawPanel = new DrawPanel(X, Y - 240, cc);
-        initComponents(framename);
-
+        drawPanel = new DrawPanel(win.X, win.Y - 240, cc);
+        win.add(drawPanel);
+        initComponents(win);
+        win.end();
+        handler = new VehicleAndMiscHandling();
         listeners.add(cc);
         listeners.add(handler);
     }
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title) {
-
-        this.setTitle(title);
-        this.setPreferredSize(new Dimension(X, Y));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
-        this.add(drawPanel);
-
+    private void initComponents(WindowView win) {
         SpinnerModel spinnerModel = new SpinnerNumberModel(0, //initial value
                 0, //min
                 100, //max
@@ -86,7 +78,7 @@ public class UserInputs extends JFrame {
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 
-        this.add(gasPanel);
+        win.add(gasPanel);
 
         controlPanel.setLayout(new GridLayout(2, 4));
 
@@ -99,21 +91,21 @@ public class UserInputs extends JFrame {
 
         controlPanel.add(addCarButton, 6);
         controlPanel.add(removeCarButton, 7);
-        controlPanel.setPreferredSize(new Dimension((X / 2) + 4, 200));
-        this.add(controlPanel);
+        controlPanel.setPreferredSize(new Dimension((win.X / 2) + 4, 200));
+        win.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
-        this.add(startButton);
+        startButton.setPreferredSize(new Dimension(win.X / 5 - 15, 200));
+        win.add(startButton);
 
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
-        this.add(stopButton);
+        stopButton.setPreferredSize(new Dimension(win.X / 5 - 15, 200));
+        win.add(stopButton);
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
@@ -187,12 +179,5 @@ public class UserInputs extends JFrame {
                 }
             }
         });
-
-        this.pack();
-
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

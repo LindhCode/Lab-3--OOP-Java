@@ -1,6 +1,9 @@
 package Application;
 
+import Controller.UserInputs;
+import Model.CarModel;
 import View.VisualUpdate;
+import View.WindowView;
 
 import java.io.IOException;
 
